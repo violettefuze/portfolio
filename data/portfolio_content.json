@@ -1,0 +1,94 @@
+{
+  "site": {
+    "title": "Tim Heid",
+    "subtitle": "Filmmaker",
+    "tagline": "Ruhige, cineastische Arbeiten mit Fokus auf Licht, Atmosphaere und echte Momente.",
+    "location": "Babelsberg / Trier / Luxemburg",
+    "pdf_source": "Bewerbung_Tim_Heid_Babelsberg.pdf"
+  },
+  "about": {
+    "headline": "Nicht der klassische Weg. Aber ein echter.",
+    "paragraphs": [
+      "Ich komme nicht aus einem theoretischen Umfeld, sondern aus echter Produktion. Bei FrameArt habe ich frueh gelernt, wie Drehs organisiert werden, wie man am Set arbeitet und wie viel Licht, Timing und Ruhe ueber die Wirkung eines Bildes entscheiden.",
+      "Spaeter habe ich Verantwortung in einer eigenen GmbH uebernommen – kreativ, organisatorisch und unternehmerisch. In der Zeit dazwischen gab es einen harten gesundheitlichen Einschnitt, der mich gezwungen hat, alles neu zu sortieren.",
+      "Gerade deshalb ist mein Blick auf Arbeit heute klarer als frueher: weniger Lautstaerke, mehr Substanz. Ich will nicht nur mitlaufen, sondern mich mit Erfahrung, Ruhe, Bildgefuehl und Verlaesslichkeit einbringen."
+    ],
+    "facts": [
+      "Werbefilmproduktion als Grundlage",
+      "Erfahrung in Kamera, Licht und Postproduktion",
+      "GmbH-Verantwortung auf kreativer und organisatorischer Ebene",
+      "Ruhige, strukturierte Arbeitsweise – auch unter Druck"
+    ]
+  },
+  "skills": {
+    "camera": [
+      "ARRI Alexa",
+      "RED Epic",
+      "Blackmagic URSA Mini Pro",
+      "Sony F30",
+      "Ronin"
+    ],
+    "postproduction": [
+      "Adobe Premiere Pro",
+      "DaVinci Resolve"
+    ],
+    "focus": "Licht ist fuer mich kein Zusatz, sondern die Grundlage jedes Bildes."
+  },
+  "projects": [
+    {
+      "slug": "saarschleife",
+      "title": "Saarschleife, Deutschland",
+      "category": "Hochzeitsfilm",
+      "role": "Konzept, Kamera, Schnitt",
+      "summary": "Ein reduzierter Hochzeitsfilm mit Fokus auf echte Momente, Ruhe und Atmosphaere.",
+      "video_url": "https://www.youtube.com/watch?v=gT0opOl7Obc",
+      "hero_image": "assets/images/saarschleife_wide.png",
+      "stills": [
+        "assets/images/saarschleife_wide.png",
+        "assets/images/saarschleife_close.png",
+        "assets/images/saarschleife_detail.png"
+      ],
+      "notes": [
+        "Naehe, Emotion, Beobachtung",
+        "Weniger Inszenierung, mehr Mensch",
+        "Location als Stimmungstraeger statt nur Kulisse"
+      ]
+    },
+    {
+      "slug": "frameart-lighting",
+      "title": "FrameArt – Lighting Piece",
+      "category": "Commercial Production",
+      "role": "Licht / Look-Entwicklung",
+      "summary": "Professionelles Produktionsumfeld mit Fokus auf Licht, Tiefe und bewusste Bildwirkung.",
+      "video_url": "https://www.youtube.com/watch?v=EuqIODuhFyY",
+      "hero_image": null,
+      "stills": [],
+      "notes": [
+        "Licht nicht nur technisch, sondern atmosphaerisch gedacht",
+        "Set-Erfahrung in groesserer Produktion",
+        "Bildlook aktiv mitgestaltet"
+      ]
+    },
+    {
+      "slug": "full-cycle",
+      "title": "Full-Cycle Production",
+      "category": "Eigenverantwortliches Projekt",
+      "role": "Equipment, Dreh, Schnitt, Grading, Kundenkontakt",
+      "summary": "Ein Projekt, in dem der komplette Prozess eigenstaendig getragen wurde – von der Vorbereitung bis zur finalen Ausspielung.",
+      "video_url": "https://www.youtube.com/watch?v=rtAVAv_6_JM",
+      "hero_image": null,
+      "stills": [],
+      "notes": [
+        "Gesamtverantwortung statt Teilrolle",
+        "Technik, Story und Organisation in einer Hand",
+        "Wichtiger Nachweis fuer selbststaendiges Arbeiten"
+      ]
+    }
+  ],
+  "contact": {
+    "email": null,
+    "instagram": null,
+    "website": null,
+    "note": "Kontaktangaben fehlen noch in der Quelldatei und koennen direkt nachgetragen werden."
+  }
+}

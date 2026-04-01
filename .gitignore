@@ -1,0 +1,12 @@
+.venv/
+.swift-module-cache/
+pdf_preview/
+pdf_preview_current/
+.DS_Store
+__pycache__/
+*.pyc
+extracted_pdf_images/
+Tim_Heid_Babelsberg_Essay.pdf
+Tim_Heid_Dokumentation.pdf
+Tim_Heid_Praesentation.pdf
+generate_tim_heid_pdf.swift
