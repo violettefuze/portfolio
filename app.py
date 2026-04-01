@@ -202,12 +202,12 @@ def render_hero(content: dict[str, Any]) -> None:
                     PDF_PATH.read_bytes(),
                     file_name=PDF_PATH.name,
                     mime="application/pdf",
-                    use_container_width=True,
+                    width="stretch",
                 )
         with c2:
-            st.link_button("GitHub repo", "https://github.com/violettefuze/portfolio", use_container_width=True)
+            st.link_button("GitHub repo", "https://github.com/violettefuze/portfolio", width="stretch")
     with right:
-        st.image(str(image_path), use_container_width=True)
+        st.image(str(image_path), width="stretch")
 
 
 def render_about(content: dict[str, Any]) -> None:
@@ -230,7 +230,7 @@ def render_project_media(project: dict[str, Any]) -> None:
     hero_image = project.get("hero_image")
     stills = project.get("stills", [])
     if hero_image:
-        st.image(str(ROOT / hero_image), use_container_width=True)
+        st.image(str(ROOT / hero_image), width="stretch")
     else:
         st.markdown(
             f'<div class="placeholder-visual"><div>{project["category"]}<br><span class="muted">{project["role"]}</span></div></div>',
@@ -241,7 +241,7 @@ def render_project_media(project: dict[str, Any]) -> None:
         gallery_cols = st.columns(len(stills), gap="small")
         for col, still in zip(gallery_cols, stills):
             with col:
-                st.image(str(ROOT / still), use_container_width=True)
+                st.image(str(ROOT / still), width="stretch")
 
 
 def render_project(project: dict[str, Any]) -> None:
@@ -260,7 +260,7 @@ def render_project(project: dict[str, Any]) -> None:
             st.markdown(f'<span class="tag">{note}</span>', unsafe_allow_html=True)
         st.write("")
         st.video(project["video_url"])
-        st.link_button("Open original link", project["video_url"], use_container_width=True)
+        st.link_button("Open original link", project["video_url"], width="stretch")
     st.markdown("</div>", unsafe_allow_html=True)
 
 
