@@ -84,8 +84,12 @@
   "skills": {
     "camera": [
       "RED Epic",
+      "RED Scarlet-W",
+      "RED Dragon",
+      "RED Komodo",
       "Blackmagic URSA Mini Pro 4.6K",
-      "ARRI Alexa"
+      "ARRI Alexa",
+      "Canon Cinema EOS / C300"
     ],
     "sound": [
       "Tonaufbau",
@@ -100,7 +104,10 @@
       "Lichtgestaltung"
     ],
     "postproduction": [
+      "Adobe Creative Suite",
       "Adobe Premiere Pro",
+      "After Effects",
+      "Sony Vegas",
       "DaVinci Resolve"
     ],
     "focus": "Moderne Filmkameras, Licht, Ton und Postproduktion sind für mich kein Spezialgebiet nebenbei, sondern Teil eines zusammenhängenden Produktionsverständnisses."

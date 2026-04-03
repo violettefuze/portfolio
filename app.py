@@ -555,19 +555,29 @@ def inject_css() -> None:
         }
 
         .quote-panel {
-            padding: 4.5rem 2.7rem;
+            margin-top: 0.9rem;
+            padding: 4.35rem 3rem;
             text-align: center;
             background:
                 radial-gradient(circle at top center, rgba(201,176,137,0.08), transparent 40%),
                 linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: center;
         }
 
         .quote-text {
-            max-width: 48rem;
-            margin: 0 auto;
+            max-width: 52rem;
+            margin: 0;
             color: #faf5ed;
-            font-size: clamp(1.7rem, 3vw, 2.85rem);
-            line-height: 1.48;
+            font-size: clamp(2.15rem, 3.8vw, 3.45rem);
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        .contact-gap {
+            height: 1.65rem;
         }
 
         .contact-panel {
@@ -579,6 +589,10 @@ def inject_css() -> None:
             color: var(--text);
             font-size: 1.02rem;
             line-height: 1.78;
+        }
+
+        .contact-value:last-child {
+            margin-bottom: 0;
         }
 
         .site-link {
@@ -951,10 +965,8 @@ def render_quote() -> None:
     render_html(
         """
         <div class="quote-panel fade-up">
-            <div class="quote-text">
-                Ich kenne Produktion nicht nur aus einer Rolle.<br>
-                Ich kenne sie von der Lehre bis zur Geschäftsführung.
-            </div>
+            <p class="quote-text">Ich kenne Produktion nicht nur aus einer Rolle.</p>
+            <p class="quote-text">Ich kenne sie von der Lehre bis zur Geschäftsführung.</p>
         </div>
         """
     )
@@ -963,24 +975,28 @@ def render_quote() -> None:
 def render_contact(content: dict[str, Any]) -> None:
     site = content["site"]
     contact = content["contact"]
+    render_html('<div class="contact-gap" aria-hidden="true"></div>')
     left, right = st.columns([0.95, 1.05], gap="large")
     with left:
         render_html('<div class="section-label">Kontakt</div>')
         render_html(f'<h2 class="section-heading">{html.escape(site["title"])}</h2>')
         render_html(f'<p class="section-copy">{html.escape(site["subtitle"])}<br>{html.escape(site["location"])}</p>')
     with right:
-        render_html('<div class="contact-panel fade-up">')
-        render_html('<div class="contact-label">Mail</div>')
-        render_html(f'<p class="contact-value">{html.escape(contact["email"])}</p>')
-        render_html('<div class="contact-label">Telefon</div>')
-        render_html(f'<p class="contact-value">{html.escape(contact["phone"])}</p>')
+        contact_markup = [
+            '<div class="contact-panel fade-up">',
+            '<div class="contact-label">Mail</div>',
+            f'<p class="contact-value">{html.escape(contact["email"])}</p>',
+            '<div class="contact-label">Telefon</div>',
+            f'<p class="contact-value">{html.escape(contact["phone"])}</p>',
+        ]
         if contact.get("website"):
-            render_html('<div class="contact-label">Website</div>')
-            render_html(
+            contact_markup.append('<div class="contact-label">Website</div>')
+            contact_markup.append(
                 f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
             )
-        render_html(f'<p class="contact-value">{html.escape(contact["note"])}</p>')
-        render_html('</div>')
+        contact_markup.append(f'<p class="contact-value">{html.escape(contact["note"])}</p>')
+        contact_markup.append('</div>')
+        render_html("".join(contact_markup))
 
 
 def main() -> None:
