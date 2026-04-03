@@ -2,24 +2,57 @@
   "site": {
     "title": "Tim Heid",
     "subtitle": "Filmmaker",
-    "tagline": "Ruhige, cineastische Arbeiten mit Fokus auf Licht, Atmosphaere und echte Momente.",
+    "tagline": "Ruhige, cineastische Arbeiten mit Fokus auf Licht, Atmosphäre und echte Momente.",
     "location": "Babelsberg / Trier / Luxemburg",
-    "pdf_source": "Bewerbung_Tim_Heid_Babelsberg.pdf"
+    "pdf_source": "Bewerbung_Tim_Heid_Babelsberg.pdf",
+    "hero_image": "assets/images/cover_still.png",
+    "hero_kicker": "Camera · Light · Edit · Color",
+    "intro": "Meine Grundlage kommt aus der professionellen Werbefilmproduktion. Heute verbinde ich diese Praxis mit einem ruhigeren Blick auf Menschen, Räume und Stimmung."
   },
   "about": {
     "headline": "Nicht der klassische Weg. Aber ein echter.",
     "paragraphs": [
-      "Ich komme nicht aus einem theoretischen Umfeld, sondern aus echter Produktion. Bei FrameArt habe ich frueh gelernt, wie Drehs organisiert werden, wie man am Set arbeitet und wie viel Licht, Timing und Ruhe ueber die Wirkung eines Bildes entscheiden.",
-      "Spaeter habe ich Verantwortung in einer eigenen GmbH uebernommen – kreativ, organisatorisch und unternehmerisch. In der Zeit dazwischen gab es einen harten gesundheitlichen Einschnitt, der mich gezwungen hat, alles neu zu sortieren.",
-      "Gerade deshalb ist mein Blick auf Arbeit heute klarer als frueher: weniger Lautstaerke, mehr Substanz. Ich will nicht nur mitlaufen, sondern mich mit Erfahrung, Ruhe, Bildgefuehl und Verlaesslichkeit einbringen."
+      "Ich komme nicht aus einem theoretischen Umfeld, sondern aus echter Produktion. Bei FrameArt Media habe ich früh gelernt, wie Drehs organisiert werden, wie man am Set arbeitet und wie viel Licht, Timing und Ruhe über die Wirkung eines Bildes entscheiden.",
+      "Später habe ich Verantwortung in einer eigenen GmbH übernommen – kreativ, organisatorisch und unternehmerisch. In der Zeit dazwischen gab es einen harten gesundheitlichen Einschnitt, der mich gezwungen hat, alles neu zu sortieren.",
+      "Gerade deshalb ist mein Blick auf Arbeit heute klarer als früher: weniger Lautstärke, mehr Substanz. Ich will nicht nur mitlaufen, sondern mich mit Erfahrung, Ruhe, Bildgefühl und Verlässlichkeit einbringen."
     ],
     "facts": [
-      "Werbefilmproduktion als Grundlage",
-      "Erfahrung in Kamera, Licht und Postproduktion",
-      "GmbH-Verantwortung auf kreativer und organisatorischer Ebene",
+      "Ausbildung und Berufspraxis in professioneller Werbefilmproduktion",
+      "Erfahrung in Kamera, Licht, Postproduktion und Set-Abläufen",
+      "Eigene GmbH mit kreativer und organisatorischer Verantwortung",
       "Ruhige, strukturierte Arbeitsweise – auch unter Druck"
     ]
   },
+  "process": [
+    {
+      "title": "Vorbereitung",
+      "text": "Konzept, Timing, technische Planung und ein klarer Blick darauf, was ein Projekt wirklich tragen soll."
+    },
+    {
+      "title": "Produktion",
+      "text": "Ruhiges Arbeiten am Set mit Gespür für Licht, Atmosphäre, Menschen und die Dynamik eines Drehtages."
+    },
+    {
+      "title": "Postproduktion",
+      "text": "Schnitt, Rhythmus und Color mit Fokus auf Wirkung statt bloßer Technik oder Lautstärke."
+    }
+  ],
+  "background": [
+    {
+      "title": "FrameArt Media",
+      "text": "Mein Fundament kommt aus der Arbeit in einer professionellen Werbefilmproduktion. Dort habe ich mein Praktikum gemacht, meine Ausbildung absolviert und in einem Umfeld gelernt, in dem Vorbereitung, Präzision und Teamarbeit selbstverständlich sind.",
+      "link_label": "FrameArt ansehen",
+      "link_url": "https://frameart.lu"
+    },
+    {
+      "title": "Eigenverantwortung",
+      "text": "Mit der eigenen GmbH kam nicht nur kreative Arbeit dazu, sondern auch Verantwortung: Kundenkommunikation, Organisation, wirtschaftliches Denken und Entscheidungen unter Druck."
+    },
+    {
+      "title": "Heute",
+      "text": "Ich suche kein beliebiges Projekt, sondern Zusammenarbeit mit Produktionen und Menschen, die Wert auf Substanz, Bildgefühl und eine verlässliche Haltung legen."
+    }
+  ],
   "skills": {
     "camera": [
       "ARRI Alexa",
@@ -32,7 +65,7 @@
       "Adobe Premiere Pro",
       "DaVinci Resolve"
     ],
-    "focus": "Licht ist fuer mich kein Zusatz, sondern die Grundlage jedes Bildes."
+    "focus": "Licht ist für mich kein Zusatz, sondern die Grundlage jedes Bildes."
   },
   "projects": [
     {
@@ -40,7 +73,7 @@
       "title": "Saarschleife, Deutschland",
       "category": "Hochzeitsfilm",
       "role": "Konzept, Kamera, Schnitt",
-      "summary": "Ein reduzierter Hochzeitsfilm mit Fokus auf echte Momente, Ruhe und Atmosphaere.",
+      "summary": "Ein reduzierter Hochzeitsfilm mit Fokus auf echte Momente, Ruhe und Atmosphäre.",
       "video_url": "https://www.youtube.com/watch?v=gT0opOl7Obc",
       "hero_image": "assets/images/saarschleife_wide.png",
       "stills": [
@@ -49,9 +82,24 @@
         "assets/images/saarschleife_detail.png"
       ],
       "notes": [
-        "Naehe, Emotion, Beobachtung",
+        "Nähe, Emotion, Beobachtung",
         "Weniger Inszenierung, mehr Mensch",
-        "Location als Stimmungstraeger statt nur Kulisse"
+        "Location als Stimmungsträger statt nur Kulisse"
+      ]
+    },
+    {
+      "slug": "drone-study",
+      "title": "Aerial Study",
+      "category": "Freies Projekt",
+      "role": "Drohne, Kamera, Schnitt",
+      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
+      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
+      "hero_image": null,
+      "stills": [],
+      "notes": [
+        "Persönliche Arbeit",
+        "Bildruhe statt Effekthascherei",
+        "Starker Blick für Geometrie und Raum"
       ]
     },
     {
@@ -64,9 +112,24 @@
       "hero_image": null,
       "stills": [],
       "notes": [
-        "Licht nicht nur technisch, sondern atmosphaerisch gedacht",
-        "Set-Erfahrung in groesserer Produktion",
+        "Licht nicht nur technisch, sondern atmosphärisch gedacht",
+        "Set-Erfahrung in größerer Produktion",
         "Bildlook aktiv mitgestaltet"
+      ]
+    },
+    {
+      "slug": "frameart-showreel",
+      "title": "FrameArt Media Showreel",
+      "category": "Produktionsumfeld",
+      "role": "Ausbildung, Praktikum und längere Mitarbeit bei FrameArt Media",
+      "summary": "Kein Claim auf jede einzelne Einstellung, sondern ein Einblick in das professionelle Umfeld, in dem mein Fundament entstanden ist.",
+      "video_url": "https://vimeo.com/1148107247/27d47d73f8?fl=pl&fe=cm&turnstile=0.n5Guhh71dbA8EgqL0NejZA3nmOMeyMs998UUzUv1A1GX1rhLroWHIEi2s-EFAmJBijebJJzsPQDNAavNuAouRcWkrtbVyRB7IWhI8eco6cVCLfclpTyasnlSpmyiVjxfgwYPO5KKJsXMvPnq1435ou6sO-imrmDFimCPbhjFQYCJQedYJ6hiPWQKrn5h1E13apH2-5kF7apQ_26mSIt9vZYoz6kJyxLouMx82r8ncDqzX-oj4wf2dWMMKNvdA1014GVgZE_QL-NvHR5M--iFI2mNP9s-uHcyTsNb7we3X7jSAFjaxtdYJdFygGtsrWfUtfE1pERmRTXOSGrRKKH4i4WG1mHE4r114wgzZwY16WQYKP_9MU1FVrE1hjuZe1rSk0bGCQenzfD2YzkW_R748b82aXH_zNKAVBWPZqjG_lVk8CAaVjwSsNGwca9gLUmM44A4cFFi_9yVBAgq4H4_CTNC2lZjWRvT0F1mOTwFK0U6FTuTh5UefiWY8ktWgMungB42ZC5tooOBtGh52g1A4zjH7QvxNBIwX7DTbZAIIfBA8T8ZjxjZzWH4v_aq5yCdlAoaKBhmyOd5x6glkb9W_EAPKTZ_okL9KS2PYSfI-NY1X3apJqFbJxXpsDI2wmBFiy50JK70cW8Z7Lk2W9hwzKudXLVj8JGmUWLDIC8hIFLmZUnvVh9Z4BsLXU66oJiOmEB9_KHchSggH_zQmrKZKd49tWGHTLmozGzTn2KjWBe3r__kbAG8w4IHiiPHc-NtPMtV-idLZjaY1CRhFkA5oEhNYE1HUXuATepb9t3O_N17PtTDJthv8hXQr4uWNBA4yGDkmxR2rMazxQJptczXK5iGHnWhbOmTap7oRkLZWZ5BJoIKDrz1rqD1P_EzSNHDN-cR1ck12I_h95RKmTbmoZvCW_lDiWua-cry0wnoWBw.KCpNpKlfpaVTQHub5YYtmw.6c716bd1c46f0e6639979a4718a65530d5675db70e7a9ac93a7b15ce04e7a45d",
+      "hero_image": null,
+      "stills": [],
+      "notes": [
+        "Professionelles Produktionsumfeld",
+        "Praktikum, Ausbildung und Berufserfahrung",
+        "Saubere Prozesse, hohe Erwartungen, echte Praxis"
       ]
     },
     {
@@ -74,21 +137,22 @@
       "title": "Full-Cycle Production",
       "category": "Eigenverantwortliches Projekt",
       "role": "Equipment, Dreh, Schnitt, Grading, Kundenkontakt",
-      "summary": "Ein Projekt, in dem der komplette Prozess eigenstaendig getragen wurde – von der Vorbereitung bis zur finalen Ausspielung.",
+      "summary": "Ein Projekt, in dem der komplette Prozess eigenständig getragen wurde – von der Vorbereitung bis zur finalen Ausspielung.",
       "video_url": "https://www.youtube.com/watch?v=rtAVAv_6_JM",
       "hero_image": null,
       "stills": [],
       "notes": [
         "Gesamtverantwortung statt Teilrolle",
         "Technik, Story und Organisation in einer Hand",
-        "Wichtiger Nachweis fuer selbststaendiges Arbeiten"
+        "Wichtiger Nachweis für selbstständiges Arbeiten"
       ]
     }
   ],
   "contact": {
-    "email": null,
+    "email": "hello@the-height.de",
+    "phone": "+49 (0) 651 436 98 718",
     "instagram": null,
-    "website": null,
-    "note": "Kontaktangaben fehlen noch in der Quelldatei und koennen direkt nachgetragen werden."
+    "website": "https://www.the-height.de",
+    "note": "Instagram kann später ergänzt werden. Für Bewerbungen reicht zunächst Mail, Telefon und Portfolio-Link."
   }
 }
