@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.4] - 2026-04-03
+
+- Rebalanced the overall page composition with a wider canvas, larger spacing rhythm, and more generous card padding.
+- Opened up the hero, statement cards, logo band, section headings, quote, and contact block so the portfolio no longer feels cramped.
+- Relaxed the horizontal film-strip proportions with more breathing room in the cards and clearer internal spacing.
+- Snapshot: `docs/versions/assets/v0.7.4-home.png`
+- Rollback target: `v0.7.4`
+
 ## [v0.7.3] - 2026-04-03
 
 - Rebuilt selected work into a horizontal film-strip slider with three visible cards on desktop and the remaining projects available via sideways scrolling.
