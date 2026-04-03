@@ -10,6 +10,15 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.1] - 2026-04-03
+
+- Removed the three hero action buttons so the landing section stays quieter and more editorial.
+- Renamed the three statement cards above the logo band to Ausbildung, Produktion, and Unternehmer.
+- Embedded the FrameArt Vimeo showreel directly in the selected-work flow using the required private Vimeo hash.
+- Reduced the separator bars between reference videos so the work section reads more cleanly.
+- Snapshot: `docs/versions/assets/v0.7.1-home.png`
+- Rollback target: `v0.7.1`
+
 ## [v0.7.0] - 2026-04-03
 
 - Reworked the portfolio around a FrameArt-inspired reading flow with fewer text blocks, stronger visual rhythm, and darker cinematic presentation.
