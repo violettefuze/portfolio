@@ -6,9 +6,11 @@
     "location": "Babelsberg / Trier / Luxemburg",
     "pdf_source": "Bewerbung_Tim_Heid_Babelsberg.pdf",
     "brand_mark": "Positive Pictogram.png",
-    "hero_image": "assets/images/cover_still.png",
-    "hero_kicker": "Camera · Light · Edit · Color",
-    "intro": "Meine Grundlage kommt aus der professionellen Werbefilmproduktion. Heute verbinde ich diese Praxis mit einem ruhigeren Blick auf Menschen, Räume und Stimmung."
+    "hero_image": "assets/images/hero_alps_panorama.jpg",
+    "hero_kicker": "The Height Filmmaking",
+    "hero_statement": "Bilder mit Ruhe. Produktionen mit Haltung.",
+    "featured_project_slug": "drone-study",
+    "intro": "Ich verbinde Werbefilmproduktion, Lichtgefühl und ruhige Bildführung zu Arbeiten, die nicht laut sein müssen, um Wirkung zu haben."
   },
   "about": {
     "headline": "Nicht der klassische Weg. Aber ein echter.",
@@ -54,6 +56,32 @@
       "text": "Ich suche kein beliebiges Projekt, sondern Zusammenarbeit mit Produktionen und Menschen, die Wert auf Substanz, Bildgefühl und eine verlässliche Haltung legen."
     }
   ],
+  "social_proof": {
+    "rating": "5.0",
+    "count": 16,
+    "platform": "Google-Bewertungen",
+    "source_label": "Google-Rezensionen, öffentlich gespiegelt über Trustindex",
+    "source_url": "https://www.trustindex.io/reviews/www.the-height.de",
+    "checked_on": "2026-04-03",
+    "summary": "Die öffentlich sichtbaren Rückmeldungen betonen vor allem starke Ergebnisse, diskrete Zusammenarbeit und eine verlässliche Umsetzung."
+  },
+  "testimonials": [
+    {
+      "name": "Herr Desen",
+      "meta": "Google-Rezension · 2022",
+      "text": "Hebt fantastische Aufnahmen hervor und empfiehlt Tim und das Team klar weiter."
+    },
+    {
+      "name": "Nina B.",
+      "meta": "Google-Rezension · 2022",
+      "text": "Beschreibt die Zusammenarbeit als diskret, zuverlässig und emotional sehr stark umgesetzt."
+    },
+    {
+      "name": "Yannis Meyer Productions",
+      "meta": "Google-Rezension · 2021",
+      "text": "Lobt Qualität, kollegiale Zusammenarbeit und den professionellen Umgang mit Filmproduktion."
+    }
+  ],
   "skills": {
     "camera": [
       "ARRI Alexa",
@@ -69,6 +97,21 @@
     "focus": "Licht ist für mich kein Zusatz, sondern die Grundlage jedes Bildes."
   },
   "projects": [
+    {
+      "slug": "drone-study",
+      "title": "Aerial Study",
+      "category": "Freies Projekt",
+      "role": "Drohne, Kamera, Schnitt",
+      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
+      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
+      "hero_image": "assets/images/hero_alps_panorama.jpg",
+      "stills": [],
+      "notes": [
+        "Persönliche Arbeit",
+        "Bildruhe statt Effekthascherei",
+        "Starker Blick für Geometrie und Raum"
+      ]
+    },
     {
       "slug": "saarschleife",
       "title": "Saarschleife, Deutschland",
@@ -86,21 +129,6 @@
         "Nähe, Emotion, Beobachtung",
         "Weniger Inszenierung, mehr Mensch",
         "Location als Stimmungsträger statt nur Kulisse"
-      ]
-    },
-    {
-      "slug": "drone-study",
-      "title": "Aerial Study",
-      "category": "Freies Projekt",
-      "role": "Drohne, Kamera, Schnitt",
-      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
-      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
-      "hero_image": null,
-      "stills": [],
-      "notes": [
-        "Persönliche Arbeit",
-        "Bildruhe statt Effekthascherei",
-        "Starker Blick für Geometrie und Raum"
       ]
     },
     {
@@ -149,6 +177,7 @@
       ]
     }
   ],
+  "partners": [],
   "contact": {
     "email": "hello@the-height.de",
     "phone": "+49 (0) 651 436 98 718",
