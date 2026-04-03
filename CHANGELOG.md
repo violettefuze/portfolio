@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.5] - 2026-04-03
+
+- Expanded the camera list with additional RED bodies and a Canon Cinema EOS entry.
+- Expanded postproduction to include the Adobe Creative Suite, After Effects, Sony Vegas, and the existing finishing tools.
+- Added more separation between the tools section and the closing contact area, tightened the quote composition, and fixed the empty contact bubble/rendering issue.
+- Snapshot: `docs/versions/assets/v0.7.5-home.png`
+- Rollback target: `v0.7.5`
+
 ## [v0.7.4] - 2026-04-03
 
 - Rebalanced the overall page composition with a wider canvas, larger spacing rhythm, and more generous card padding.
