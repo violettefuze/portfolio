@@ -486,30 +486,34 @@ def inject_css() -> None:
 
         .work-title {
             margin: 0;
-            font-size: 1.9rem;
-            line-height: 1.02;
+            font-size: 1.72rem;
+            line-height: 1.04;
             color: #faf5ed;
         }
 
         .work-role {
-            margin-top: 0.5rem;
+            margin-top: 0.36rem;
             color: var(--muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.88rem;
+            line-height: 1.56;
         }
 
         .work-summary {
-            margin-top: 0.9rem;
+            margin-top: 0.68rem;
             color: var(--text);
-            font-size: 1rem;
-            line-height: 1.78;
+            font-size: 0.94rem;
+            line-height: 1.58;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .tag-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.55rem;
-            margin-top: 1rem;
+            gap: 0.42rem;
+            margin-top: 0.75rem;
         }
 
         .tag {
@@ -518,9 +522,33 @@ def inject_css() -> None:
             border-radius: 999px;
             border: 1px solid rgba(201,176,137,0.18);
             background: rgba(201,176,137,0.08);
-            padding: 0.42rem 0.72rem;
+            padding: 0.34rem 0.62rem;
             color: rgba(251,246,239,0.86);
+            font-size: 0.76rem;
+        }
+
+        .work-link {
+            margin-top: 0.72rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 2.2rem;
+            border-radius: 14px;
+            border: 1px solid rgba(201,176,137,0.18);
+            background: rgba(255,255,255,0.015);
+            color: var(--text) !important;
+            text-decoration: none;
             font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+        }
+
+        .work-link:hover {
+            border-color: rgba(201,176,137,0.34);
+            background: rgba(201,176,137,0.08);
+            transform: translateY(-1px);
         }
 
         .quote-panel {
@@ -599,7 +627,6 @@ def render_topbar(content: dict[str, Any]) -> None:
             </div>
             <div class="nav-copy">
                 <span>Selected Work</span>
-                <span>Clients</span>
                 <span>Experience</span>
                 <span>Contact</span>
             </div>
@@ -672,17 +699,19 @@ def render_selected_work_intro() -> None:
 
 def render_project(project: dict[str, Any], index: int) -> None:
     render_html('<div class="work-card fade-up">')
-    video_col, text_col = st.columns([1.12, 0.88], gap="medium")
+    video_col, text_col = st.columns([1.04, 0.96], gap="medium")
     with video_col:
-        render_video_player(project["video_url"], project["title"], height=390 if index == 0 else 330)
+        render_video_player(project["video_url"], project["title"], height=310 if index == 0 else 280)
     with text_col:
         render_html(f'<p class="work-label">{html.escape(project["category"])}</p>')
         render_html(f'<h3 class="work-title">{html.escape(project["title"])}</h3>')
         render_html(f'<p class="work-role">{html.escape(project["role"])}</p>')
         render_html(f'<p class="work-summary">{html.escape(project["summary"])}</p>')
-        notes = "".join(f'<span class="tag">{html.escape(note)}</span>' for note in project.get("notes", []))
+        notes = "".join(f'<span class="tag">{html.escape(note)}</span>' for note in project.get("notes", [])[:2])
         render_html(f'<div class="tag-row">{notes}</div>')
-        st.link_button("Original öffnen", project["video_url"], width="stretch")
+        render_html(
+            f'<a class="work-link" href="{html.escape(project["video_url"], quote=True)}" target="_blank" rel="noreferrer">Original öffnen</a>'
+        )
     render_html("</div>")
 
 
@@ -767,10 +796,11 @@ def render_contact(content: dict[str, Any]) -> None:
         render_html(f'<p class="contact-value">{html.escape(contact["email"])}</p>')
         render_html('<div class="contact-label">Telefon</div>')
         render_html(f'<p class="contact-value">{html.escape(contact["phone"])}</p>')
-        render_html('<div class="contact-label">Website</div>')
-        render_html(
-            f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
-        )
+        if contact.get("website"):
+            render_html('<div class="contact-label">Website</div>')
+            render_html(
+                f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
+            )
         render_html(f'<p class="contact-value">{html.escape(contact["note"])}</p>')
         render_html('</div>')
 
