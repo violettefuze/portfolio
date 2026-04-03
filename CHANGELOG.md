@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.6.0] - 2026-04-03
+
+- Returned from the newer layout experiments to the earlier dark portfolio direction that better matched the preferred black visual style.
+- Restored the stronger `v0.3.0` composition while keeping the newer panorama hero image and current project/video data.
+- Put the project order back closer to the earlier portfolio flow, with Saarschleife leading the selected-work section again.
+- Snapshot: `docs/versions/assets/v0.6.0-home.png`
+- Rollback target: `v0.6.0`
+
 ## [v0.5.0] - 2026-04-03
 
 - Moved away from the Apple-style landing page and returned to a more standard, calmer portfolio structure closer to the earlier preferred version.
