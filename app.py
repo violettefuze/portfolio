@@ -528,7 +528,7 @@ def inject_css() -> None:
         }
 
         .work-link {
-            margin-top: 0.72rem;
+            margin-top: 0.48rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -691,34 +691,192 @@ def render_partner_logos(content: dict[str, Any]) -> None:
 
 def render_selected_work_intro() -> None:
     render_html('<div class="section-label">Selected Work</div>')
-    render_html('<h2 class="section-heading">Von oben nach unten lesbar. Erst Wirkung, dann Details.</h2>')
+    render_html('<h2 class="section-heading">Drei Projekte im Blick. Der Rest im horizontalen Film-Strip.</h2>')
     render_html(
-        '<p class="section-copy">Weniger Text, klarere Aussagen und Arbeiten, die zeigen, wie breit das Produktionswissen wirklich ist: FrameArt-Produktionen, Corporate-Arbeit und eigene Filme mit kompletter Verantwortung.</p>'
+        '<p class="section-copy">Die ersten Arbeiten sind sofort sichtbar. Weitere Projekte lassen sich seitlich durchscrollen, damit die Seite kompakter bleibt und trotzdem alles zeigen kann.</p>'
     )
-
-
-def render_project(project: dict[str, Any], index: int) -> None:
-    render_html('<div class="work-card fade-up">')
-    video_col, text_col = st.columns([1.04, 0.96], gap="medium")
-    with video_col:
-        render_video_player(project["video_url"], project["title"], height=310 if index == 0 else 280)
-    with text_col:
-        render_html(f'<p class="work-label">{html.escape(project["category"])}</p>')
-        render_html(f'<h3 class="work-title">{html.escape(project["title"])}</h3>')
-        render_html(f'<p class="work-role">{html.escape(project["role"])}</p>')
-        render_html(f'<p class="work-summary">{html.escape(project["summary"])}</p>')
-        notes = "".join(f'<span class="tag">{html.escape(note)}</span>' for note in project.get("notes", [])[:2])
-        render_html(f'<div class="tag-row">{notes}</div>')
-        render_html(
-            f'<a class="work-link" href="{html.escape(project["video_url"], quote=True)}" target="_blank" rel="noreferrer">Original öffnen</a>'
-        )
-    render_html("</div>")
 
 
 def render_selected_work(content: dict[str, Any]) -> None:
     render_selected_work_intro()
-    for index, project in enumerate(content["projects"]):
-        render_project(project, index)
+    cards = []
+    for project in content["projects"]:
+        embed_url = video_embed_url(project["video_url"]) or project["video_url"]
+        cards.append(
+            f"""
+            <article class="slider-card">
+                <div class="slider-video-shell">
+                    <iframe
+                        src="{html.escape(embed_url, quote=True)}"
+                        title="{html.escape(project["title"])}"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <div class="slider-copy">
+                    <p class="slider-label">{html.escape(project["category"])}</p>
+                    <h3>{html.escape(project["title"])}</h3>
+                    <p class="slider-role">{html.escape(project["role"])}</p>
+                    <p class="slider-summary">{html.escape(project["summary"])}</p>
+                    <a class="slider-link" href="{html.escape(project["video_url"], quote=True)}" target="_blank" rel="noreferrer">Original öffnen</a>
+                </div>
+            </article>
+            """
+        )
+
+    components.html(
+        f"""
+        <style>
+            html, body {{
+                margin: 0;
+                background: transparent;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color: #f3ede4;
+            }}
+
+            .slider-shell {{
+                display: flex;
+                flex-direction: column;
+                gap: 0.85rem;
+            }}
+
+            .slider-note {{
+                margin: 0;
+                color: rgba(243,237,228,0.54);
+                font-size: 0.76rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }}
+
+            .slider-track {{
+                display: grid;
+                grid-auto-flow: column;
+                grid-auto-columns: calc((100% - 2rem) / 3);
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 0.6rem;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(201,176,137,0.36) transparent;
+            }}
+
+            .slider-track::-webkit-scrollbar {{
+                height: 8px;
+            }}
+
+            .slider-track::-webkit-scrollbar-thumb {{
+                background: rgba(201,176,137,0.34);
+                border-radius: 999px;
+            }}
+
+            .slider-card {{
+                scroll-snap-align: start;
+                border-radius: 24px;
+                border: 1px solid rgba(201,176,137,0.12);
+                background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+                overflow: hidden;
+                box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+            }}
+
+            .slider-video-shell {{
+                aspect-ratio: 16 / 9;
+                background: #0f0d0c;
+            }}
+
+            .slider-video-shell iframe {{
+                width: 100%;
+                height: 100%;
+                border: 0;
+                display: block;
+            }}
+
+            .slider-copy {{
+                padding: 1rem 1rem 1.05rem;
+            }}
+
+            .slider-label {{
+                margin: 0 0 0.42rem 0;
+                font-size: 0.72rem;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: #c9b089;
+            }}
+
+            .slider-copy h3 {{
+                margin: 0;
+                font-size: 1.16rem;
+                line-height: 1.1;
+                color: #faf5ed;
+            }}
+
+            .slider-role {{
+                margin: 0.42rem 0 0 0;
+                color: rgba(243,237,228,0.66);
+                font-size: 0.82rem;
+                line-height: 1.5;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }}
+
+            .slider-summary {{
+                margin: 0.58rem 0 0 0;
+                color: rgba(243,237,228,0.84);
+                font-size: 0.88rem;
+                line-height: 1.55;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }}
+
+            .slider-link {{
+                margin-top: 0.78rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 2.15rem;
+                border-radius: 14px;
+                border: 1px solid rgba(201,176,137,0.18);
+                background: rgba(255,255,255,0.018);
+                color: #f3ede4;
+                text-decoration: none;
+                font-size: 0.78rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+            }}
+
+            .slider-link:hover {{
+                border-color: rgba(201,176,137,0.34);
+                background: rgba(201,176,137,0.08);
+                transform: translateY(-1px);
+            }}
+
+            @media (max-width: 980px) {{
+                .slider-track {{
+                    grid-auto-columns: calc((100% - 1rem) / 2);
+                }}
+            }}
+
+            @media (max-width: 720px) {{
+                .slider-track {{
+                    grid-auto-columns: 88%;
+                }}
+            }}
+        </style>
+        <div class="slider-shell">
+            <p class="slider-note">Drei Projekte im Blick. Seitlich scrollen für mehr.</p>
+            <div class="slider-track">
+                {"".join(cards)}
+            </div>
+        </div>
+        """,
+        height=520,
+    )
 
 
 def render_experience(content: dict[str, Any]) -> None:
