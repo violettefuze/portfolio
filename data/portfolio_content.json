@@ -2,187 +2,216 @@
   "site": {
     "title": "Tim Heid",
     "subtitle": "Filmmaker",
-    "tagline": "Ruhige, cineastische Arbeiten mit Fokus auf Licht, Atmosphäre und echte Momente.",
+    "tagline": "Weniger Worte. Mehr Bildwirkung.",
     "location": "Babelsberg / Trier / Luxemburg",
     "pdf_source": "Bewerbung_Tim_Heid_Babelsberg.pdf",
     "brand_mark": "Positive Pictogram.png",
     "hero_image": "assets/images/hero_alps_panorama.jpg",
     "hero_kicker": "Camera · Light · Edit · Color",
-    "hero_statement": "Bilder mit Ruhe. Produktionen mit Haltung.",
-    "featured_project_slug": "drone-study",
-    "intro": "Ich verbinde Werbefilmproduktion, Lichtgefühl und ruhige Bildführung zu Arbeiten, die nicht laut sein müssen, um Wirkung zu haben."
+    "hero_statement": "Ausgebildet in einer der führenden Werbeproduktionen Luxemburgs. Europaweit einsatzbereit.",
+    "intro": "Lehre bei FrameArt Media, später Gesellschafter und Geschäftsführer der eigenen GmbH. Dadurch kenne ich Set, Technik, Kundenarbeit und Verantwortung nicht nur aus einer einzigen Perspektive.",
+    "availability_note": "Bereit, den Wohnort für die richtige Produktion zu ändern."
   },
   "about": {
-    "headline": "Nicht der klassische Weg. Aber ein echter.",
+    "headline": "Solides Produktionswissen. Ruhige Bilder. Klare Haltung.",
     "paragraphs": [
-      "Ich komme nicht aus einem theoretischen Umfeld, sondern aus echter Produktion. Bei FrameArt Media habe ich früh gelernt, wie Drehs organisiert werden, wie man am Set arbeitet und wie viel Licht, Timing und Ruhe über die Wirkung eines Bildes entscheiden.",
-      "Später habe ich Verantwortung in einer eigenen GmbH übernommen – kreativ, organisatorisch und unternehmerisch. In der Zeit dazwischen gab es einen harten gesundheitlichen Einschnitt, der mich gezwungen hat, alles neu zu sortieren.",
-      "Gerade deshalb ist mein Blick auf Arbeit heute klarer als früher: weniger Lautstärke, mehr Substanz. Ich will nicht nur mitlaufen, sondern mich mit Erfahrung, Ruhe, Bildgefühl und Verlässlichkeit einbringen."
+      "Ich habe in einer der größten Werbeproduktionen Luxemburgs gelernt, europaweit an Produktionen mitgearbeitet und später selbst unternehmerische Verantwortung getragen.",
+      "Deshalb bringe ich nicht nur Bildgefühl mit, sondern auch echte Praxis in Kamera, Licht, Ton, Postproduktion, Organisation und Kundenumgang."
     ],
     "facts": [
-      "Ausbildung und Berufspraxis in professioneller Werbefilmproduktion",
-      "Erfahrung in Kamera, Licht, Postproduktion und Set-Abläufen",
-      "Eigene GmbH mit kreativer und organisatorischer Verantwortung",
-      "Ruhige, strukturierte Arbeitsweise – auch unter Druck"
+      "Lehre bei FrameArt Media",
+      "Produktionen in ganz Europa",
+      "Gesellschafter und Geschäftsführer",
+      "Bereit für Ortswechsel"
     ]
   },
+  "statements": [
+    "Ausbildung in einer führenden Werbeproduktionsfirma Luxemburgs.",
+    "Erfahrung in Kamera, Licht, Ton, Postproduktion und Set-Logistik.",
+    "Eigene GmbH mit Verantwortung für Kunden, Abläufe und Ergebnisse."
+  ],
   "process": [
     {
-      "title": "Vorbereitung",
-      "text": "Konzept, Timing, technische Planung und ein klarer Blick darauf, was ein Projekt wirklich tragen soll."
+      "title": "Pre-Production",
+      "text": "Konzept, Timing, Technik und ein realistischer Blick darauf, was ein Drehtag wirklich braucht."
     },
     {
-      "title": "Produktion",
-      "text": "Ruhiges Arbeiten am Set mit Gespür für Licht, Atmosphäre, Menschen und die Dynamik eines Drehtages."
+      "title": "Production",
+      "text": "Sicherer Umgang mit Crew, Kamera, Licht und Drucksituationen am Set."
     },
     {
-      "title": "Postproduktion",
-      "text": "Schnitt, Rhythmus und Color mit Fokus auf Wirkung statt bloßer Technik oder Lautstärke."
+      "title": "Post-Production",
+      "text": "Schnitt, Color und Ausspielung mit Gespür für Wirkung statt Überladung."
     }
   ],
   "background": [
     {
       "title": "FrameArt Media",
-      "text": "Mein Fundament kommt aus der Arbeit in einer professionellen Werbefilmproduktion. Dort habe ich mein Praktikum gemacht, meine Ausbildung absolviert und in einem Umfeld gelernt, in dem Vorbereitung, Präzision und Teamarbeit selbstverständlich sind.",
+      "text": "Lehre und längere Praxiserfahrung in einer der prägenden Werbeproduktionen Luxemburgs, mit Projekten weit über das Land hinaus.",
       "link_label": "FrameArt ansehen",
       "link_url": "https://frameart.lu"
     },
     {
-      "title": "Eigenverantwortung",
-      "text": "Mit der eigenen GmbH kam nicht nur kreative Arbeit dazu, sondern auch Verantwortung: Kundenkommunikation, Organisation, wirtschaftliches Denken und Entscheidungen unter Druck."
+      "title": "Europaweit gearbeitet",
+      "text": "Produktionen, Kunden und Anforderungen über Luxemburg hinaus haben meinen Blick auf professionelle Abläufe deutlich erweitert."
     },
     {
-      "title": "Heute",
-      "text": "Ich suche kein beliebiges Projekt, sondern Zusammenarbeit mit Produktionen und Menschen, die Wert auf Substanz, Bildgefühl und eine verlässliche Haltung legen."
+      "title": "Flexibel",
+      "text": "Für die richtige Produktion bin ich bereit, den Wohnort zu ändern und mich voll auf ein neues Umfeld einzulassen."
     }
   ],
-  "social_proof": {
-    "rating": "5.0",
-    "count": 16,
-    "platform": "Google-Bewertungen",
-    "source_label": "Google-Rezensionen, öffentlich gespiegelt über Trustindex",
-    "source_url": "https://www.trustindex.io/reviews/www.the-height.de",
-    "checked_on": "2026-04-03",
-    "summary": "Die öffentlich sichtbaren Rückmeldungen betonen vor allem starke Ergebnisse, diskrete Zusammenarbeit und eine verlässliche Umsetzung."
-  },
-  "testimonials": [
-    {
-      "name": "Herr Desen",
-      "meta": "Google-Rezension · 2022",
-      "text": "Hebt fantastische Aufnahmen hervor und empfiehlt Tim und das Team klar weiter."
-    },
-    {
-      "name": "Nina B.",
-      "meta": "Google-Rezension · 2022",
-      "text": "Beschreibt die Zusammenarbeit als diskret, zuverlässig und emotional sehr stark umgesetzt."
-    },
-    {
-      "name": "Yannis Meyer Productions",
-      "meta": "Google-Rezension · 2021",
-      "text": "Lobt Qualität, kollegiale Zusammenarbeit und den professionellen Umgang mit Filmproduktion."
-    }
+  "partners": [
+    { "name": "FrameArt Client Logo 01", "logo": "assets/partners/frameart-client-01.png" },
+    { "name": "FrameArt Client Logo 02", "logo": "assets/partners/frameart-client-02.png" },
+    { "name": "FrameArt Client Logo 03", "logo": "assets/partners/frameart-client-03.png" },
+    { "name": "FrameArt Client Logo 04", "logo": "assets/partners/frameart-client-04.png" },
+    { "name": "FrameArt Client Logo 05", "logo": "assets/partners/frameart-client-05.png" },
+    { "name": "FrameArt Client Logo 06", "logo": "assets/partners/frameart-client-06.png" },
+    { "name": "FrameArt Client Logo 07", "logo": "assets/partners/frameart-client-07.png" },
+    { "name": "FrameArt Client Logo 08", "logo": "assets/partners/frameart-client-08.png" },
+    { "name": "FrameArt Client Logo 09", "logo": "assets/partners/frameart-client-09.png" },
+    { "name": "FrameArt Client Logo 10", "logo": "assets/partners/frameart-client-10.png" }
   ],
   "skills": {
     "camera": [
-      "ARRI Alexa",
       "RED Epic",
-      "Blackmagic URSA Mini Pro",
-      "Sony F30",
-      "Ronin"
+      "Blackmagic URSA Mini Pro 4.6K",
+      "ARRI Alexa"
+    ],
+    "sound": [
+      "Tonaufbau",
+      "Funkstrecken",
+      "Set-Audio",
+      "Sound-Betreuung"
+    ],
+    "lighting": [
+      "Set-Licht",
+      "Available Light",
+      "Mood Lighting",
+      "Lichtgestaltung"
     ],
     "postproduction": [
       "Adobe Premiere Pro",
       "DaVinci Resolve"
     ],
-    "focus": "Licht ist für mich kein Zusatz, sondern die Grundlage jedes Bildes."
+    "focus": "Moderne Filmkameras, Licht, Ton und Postproduktion sind für mich kein Spezialgebiet nebenbei, sondern Teil eines zusammenhängenden Produktionsverständnisses."
   },
   "projects": [
     {
-      "slug": "saarschleife",
-      "title": "Saarschleife, Deutschland",
+      "slug": "feuerloft",
+      "title": "FEUERLOFT Luxembourg",
+      "category": "Mood Film",
+      "role": "Second Camera · Camera Assist · Lighting Unit",
+      "summary": "Atmosphärischer Mood Film im FrameArt-Umfeld. Viel Wirkung über Licht, Rhythmus und kontrollierte Bildruhe.",
+      "video_url": "https://www.youtube.com/watch?v=yISnzdrPbR4",
+      "hero_image": "assets/images/project_feuerloft.jpg",
+      "stills": [],
+      "notes": [
+        "FrameArt Produktion",
+        "Atmosphäre zuerst",
+        "Licht und Bildgefühl"
+      ]
+    },
+    {
+      "slug": "lux-airport",
+      "title": "lux-Airport | My Journey Starts Here",
+      "category": "Corporate Film",
+      "role": "Second Camera · Camera Assist · Lighting Unit",
+      "summary": "Mein persönlicher Favorit im FrameArt-Umfeld. Ein großer Imagefilm für einen Flughafen mit hohem Produktionsanspruch.",
+      "video_url": "https://www.youtube.com/watch?v=EuqIODuhFyY",
+      "hero_image": "assets/images/project_lux_airport.jpg",
+      "stills": [],
+      "notes": [
+        "Lieblingsfilm",
+        "Großer Imagefilm",
+        "FrameArt Produktion"
+      ]
+    },
+    {
+      "slug": "arthur-welter",
+      "title": "ARTHUR WELTER Transports",
+      "category": "Imagefilm",
+      "role": "Second Camera · Camera Assist · Lighting Unit",
+      "summary": "Corporate-Arbeit im professionellen Werbefilmkontext, mit sauberer Teamarbeit und klarer visueller Linie.",
+      "video_url": "https://www.youtube.com/watch?v=SF5cemPBlA4",
+      "hero_image": "assets/images/project_arthur_welter.jpg",
+      "stills": [],
+      "notes": [
+        "FrameArt Produktion",
+        "Corporate Bildsprache",
+        "Set-Erfahrung"
+      ]
+    },
+    {
+      "slug": "provencale",
+      "title": "La Provençale",
+      "category": "Imagefilm",
+      "role": "Second Camera · Camera Assist · Lighting Unit",
+      "summary": "Imagefilm aus dem FrameArt-Umfeld mit Fokus auf Präzision, Bildklarheit und professionelle Produktionsabläufe.",
+      "video_url": "https://www.youtube.com/watch?v=QdqQabhuKNc",
+      "hero_image": "assets/images/project_provencale.jpg",
+      "stills": [],
+      "notes": [
+        "FrameArt Produktion",
+        "Imagefilm",
+        "Technik und Ablauf"
+      ]
+    },
+    {
+      "slug": "henry-christina",
+      "title": "Henry & Christina",
       "category": "Hochzeitsfilm",
-      "role": "Konzept, Kamera, Schnitt",
-      "summary": "Ein reduzierter Hochzeitsfilm mit Fokus auf echte Momente, Ruhe und Atmosphäre.",
-      "video_url": "https://www.youtube.com/watch?v=gT0opOl7Obc",
-      "hero_image": "assets/images/saarschleife_wide.png",
+      "role": "Konzept · Kamera · Licht · Ton · Schnitt · Color",
+      "summary": "Ein Film, den ich von A bis Z selbst getragen habe. Idee, Dreh, Ton, Licht, Schnitt und Look lagen komplett bei mir.",
+      "video_url": "https://www.youtube.com/watch?v=rtAVAv_6_JM&t=2s",
+      "hero_image": "assets/images/project_henry_christina.jpg",
+      "stills": [],
+      "notes": [
+        "Alles selbst gemacht",
+        "A bis Z Verantwortung",
+        "Eigenproduktion"
+      ]
+    },
+    {
+      "slug": "corinne-hagen",
+      "title": "Corinne & Hagen",
+      "category": "Hochzeitsfilm",
+      "role": "Konzept · Kamera · Schnitt",
+      "summary": "Hochzeitsfilm mit mobiler RED-Kamera-Konfiguration aus dem Transporter-Setup. Flexibel, schnell und trotzdem cineastisch.",
+      "video_url": "https://www.youtube.com/watch?v=gT0opOl7Obc&t=20s",
+      "hero_image": "assets/images/project_corinne_hagen.jpg",
       "stills": [
         "assets/images/saarschleife_wide.png",
         "assets/images/saarschleife_close.png",
         "assets/images/saarschleife_detail.png"
       ],
       "notes": [
-        "Nähe, Emotion, Beobachtung",
-        "Weniger Inszenierung, mehr Mensch",
-        "Location als Stimmungsträger statt nur Kulisse"
-      ]
-    },
-    {
-      "slug": "drone-study",
-      "title": "Aerial Study",
-      "category": "Freies Projekt",
-      "role": "Drohne, Kamera, Schnitt",
-      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
-      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
-      "hero_image": "assets/images/hero_alps_panorama.jpg",
-      "stills": [],
-      "notes": [
-        "Persönliche Arbeit",
-        "Bildruhe statt Effekthascherei",
-        "Starker Blick für Geometrie und Raum"
-      ]
-    },
-    {
-      "slug": "frameart-lighting",
-      "title": "FrameArt – Lighting Piece",
-      "category": "Commercial Production",
-      "role": "Licht / Look-Entwicklung",
-      "summary": "Professionelles Produktionsumfeld mit Fokus auf Licht, Tiefe und bewusste Bildwirkung.",
-      "video_url": "https://www.youtube.com/watch?v=EuqIODuhFyY",
-      "hero_image": null,
-      "stills": [],
-      "notes": [
-        "Licht nicht nur technisch, sondern atmosphärisch gedacht",
-        "Set-Erfahrung in größerer Produktion",
-        "Bildlook aktiv mitgestaltet"
+        "RED Kamera",
+        "Mobiles Setup",
+        "Hochzeitsfilm"
       ]
     },
     {
       "slug": "frameart-showreel",
       "title": "FrameArt Media Showreel",
       "category": "Produktionsumfeld",
-      "role": "Ausbildung, Praktikum und längere Mitarbeit bei FrameArt Media",
-      "summary": "Kein Claim auf jede einzelne Einstellung, sondern ein Einblick in das professionelle Umfeld, in dem mein Fundament entstanden ist.",
+      "role": "Lehre · Set-Erfahrung · europaweite Produktionserfahrung",
+      "summary": "Darf bewusst Teil der Bewerbung sein, weil es das professionelle Umfeld zeigt, in dem mein Fundament entstanden ist.",
       "video_url": "https://vimeo.com/1148107247/27d47d73f8?fl=pl&fe=cm&turnstile=0.n5Guhh71dbA8EgqL0NejZA3nmOMeyMs998UUzUv1A1GX1rhLroWHIEi2s-EFAmJBijebJJzsPQDNAavNuAouRcWkrtbVyRB7IWhI8eco6cVCLfclpTyasnlSpmyiVjxfgwYPO5KKJsXMvPnq1435ou6sO-imrmDFimCPbhjFQYCJQedYJ6hiPWQKrn5h1E13apH2-5kF7apQ_26mSIt9vZYoz6kJyxLouMx82r8ncDqzX-oj4wf2dWMMKNvdA1014GVgZE_QL-NvHR5M--iFI2mNP9s-uHcyTsNb7we3X7jSAFjaxtdYJdFygGtsrWfUtfE1pERmRTXOSGrRKKH4i4WG1mHE4r114wgzZwY16WQYKP_9MU1FVrE1hjuZe1rSk0bGCQenzfD2YzkW_R748b82aXH_zNKAVBWPZqjG_lVk8CAaVjwSsNGwca9gLUmM44A4cFFi_9yVBAgq4H4_CTNC2lZjWRvT0F1mOTwFK0U6FTuTh5UefiWY8ktWgMungB42ZC5tooOBtGh52g1A4zjH7QvxNBIwX7DTbZAIIfBA8T8ZjxjZzWH4v_aq5yCdlAoaKBhmyOd5x6glkb9W_EAPKTZ_okL9KS2PYSfI-NY1X3apJqFbJxXpsDI2wmBFiy50JK70cW8Z7Lk2W9hwzKudXLVj8JGmUWLDIC8hIFLmZUnvVh9Z4BsLXU66oJiOmEB9_KHchSggH_zQmrKZKd49tWGHTLmozGzTn2KjWBe3r__kbAG8w4IHiiPHc-NtPMtV-idLZjaY1CRhFkA5oEhNYE1HUXuATepb9t3O_N17PtTDJthv8hXQr4uWNBA4yGDkmxR2rMazxQJptczXK5iGHnWhbOmTap7oRkLZWZ5BJoIKDrz1rqD1P_EzSNHDN-cR1ck12I_h95RKmTbmoZvCW_lDiWua-cry0wnoWBw.KCpNpKlfpaVTQHub5YYtmw.6c716bd1c46f0e6639979a4718a65530d5675db70e7a9ac93a7b15ce04e7a45d",
       "hero_image": null,
       "stills": [],
       "notes": [
-        "Professionelles Produktionsumfeld",
-        "Praktikum, Ausbildung und Berufserfahrung",
-        "Saubere Prozesse, hohe Erwartungen, echte Praxis"
-      ]
-    },
-    {
-      "slug": "full-cycle",
-      "title": "Full-Cycle Production",
-      "category": "Eigenverantwortliches Projekt",
-      "role": "Equipment, Dreh, Schnitt, Grading, Kundenkontakt",
-      "summary": "Ein Projekt, in dem der komplette Prozess eigenständig getragen wurde – von der Vorbereitung bis zur finalen Ausspielung.",
-      "video_url": "https://www.youtube.com/watch?v=rtAVAv_6_JM",
-      "hero_image": null,
-      "stills": [],
-      "notes": [
-        "Gesamtverantwortung statt Teilrolle",
-        "Technik, Story und Organisation in einer Hand",
-        "Wichtiger Nachweis für selbstständiges Arbeiten"
+        "FrameArt Showreel",
+        "Bewerbung erlaubt",
+        "Produktionsumfeld"
       ]
     }
   ],
-  "partners": [],
   "contact": {
     "email": "hello@the-height.de",
     "phone": "+49 (0) 651 436 98 718",
     "instagram": null,
     "website": "https://www.the-height.de",
-    "note": "Instagram kann später ergänzt werden. Für Bewerbungen reicht zunächst Mail, Telefon und Portfolio-Link."
+    "note": "Für Produktionen, Festanstellung oder projektbezogene Zusammenarbeit kurzfristig ansprechbar."
   }
 }
