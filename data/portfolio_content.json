@@ -26,9 +26,18 @@
     ]
   },
   "statements": [
-    "Ausbildung in einer führenden Werbeproduktionsfirma Luxemburgs.",
-    "Erfahrung in Kamera, Licht, Ton, Postproduktion und Set-Logistik.",
-    "Eigene GmbH mit Verantwortung für Kunden, Abläufe und Ergebnisse."
+    {
+      "label": "Ausbildung",
+      "text": "Ausbildung in einer führenden Werbeproduktionsfirma Luxemburgs."
+    },
+    {
+      "label": "Produktion",
+      "text": "Erfahrung in Kamera, Licht, Ton, Postproduktion und Set-Logistik."
+    },
+    {
+      "label": "Unternehmer",
+      "text": "Eigene GmbH mit Verantwortung für Kunden, Abläufe und Ergebnisse."
+    }
   ],
   "process": [
     {

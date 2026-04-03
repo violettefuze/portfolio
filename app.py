@@ -13,7 +13,6 @@ import streamlit.components.v1 as components
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "portfolio_content.json"
-PDF_PATH = ROOT / "Bewerbung_Tim_Heid_Babelsberg.pdf"
 
 
 def load_content() -> dict[str, Any]:
@@ -52,7 +51,15 @@ def video_embed_url(url: str) -> str | None:
     if "vimeo.com" in host:
         segments = [segment for segment in parsed.path.split("/") if segment]
         video_id = next((segment for segment in segments if segment.isdigit()), None)
-        return f"https://player.vimeo.com/video/{video_id}" if video_id else None
+        if not video_id:
+            return None
+
+        video_index = segments.index(video_id)
+        video_hash = segments[video_index + 1] if len(segments) > video_index + 1 else None
+        embed_url = f"https://player.vimeo.com/video/{video_id}"
+        if video_hash:
+            embed_url = f"{embed_url}?h={video_hash}"
+        return embed_url
 
     return None
 
@@ -370,8 +377,7 @@ def inject_css() -> None:
         }
 
         .statement-card:hover,
-        .skill-card:hover,
-        .work-card:hover {
+        .skill-card:hover {
             transform: translateY(-4px);
             border-color: rgba(201,176,137,0.28);
             box-shadow: 0 18px 44px rgba(0,0,0,0.24);
@@ -470,40 +476,12 @@ def inject_css() -> None:
         }
 
         .work-card {
-            padding: 1.25rem;
-            margin-top: 1.2rem;
-            transition: transform 0.26s ease, border-color 0.26s ease;
-        }
-
-        .work-placeholder {
-            min-height: 330px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-radius: 26px;
-            border: 1px solid rgba(201,176,137,0.14);
-            background:
-                radial-gradient(circle at top center, rgba(201,176,137,0.08), transparent 46%),
-                linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-            box-shadow: 0 18px 40px rgba(0,0,0,0.22);
-            padding: 2rem;
-        }
-
-        .work-placeholder-title {
-            margin: 0;
-            font-size: 2rem;
-            line-height: 1.04;
-            color: #faf5ed;
-        }
-
-        .work-placeholder-copy {
-            margin-top: 0.9rem;
-            max-width: 24rem;
-            color: var(--muted);
-            font-size: 0.98rem;
-            line-height: 1.75;
+            min-height: 0.38rem;
+            margin-top: 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(201,176,137,0.08);
+            background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(201,176,137,0.06), rgba(255,255,255,0.015));
+            box-shadow: none;
         }
 
         .work-title {
@@ -652,20 +630,14 @@ def render_hero(content: dict[str, Any]) -> None:
         """
     )
 
-    left, middle, right = st.columns(3, gap="small")
-    with left:
-        st.link_button("Bewerbungs-PDF", f"data:application/pdf;base64,{base64.b64encode(PDF_PATH.read_bytes()).decode('ascii')}", width="stretch")
-    with middle:
-        st.link_button("FrameArt", "https://frameart.lu", width="stretch")
-    with right:
-        st.link_button("Website", content["contact"]["website"], width="stretch")
-
 
 def render_statements(content: dict[str, Any]) -> None:
     cards = ['<div class="statement-grid fade-up">']
-    for text in content["statements"]:
+    for item in content["statements"]:
+        label = item["label"] if isinstance(item, dict) else "Erfahrung"
+        text = item["text"] if isinstance(item, dict) else item
         cards.append(
-            f'<div class="statement-card"><p class="statement-label">Erfahrung</p>'
+            f'<div class="statement-card"><p class="statement-label">{html.escape(label)}</p>'
             f'<p class="statement-text">{html.escape(text)}</p></div>'
         )
     cards.append("</div>")
@@ -700,19 +672,9 @@ def render_selected_work_intro() -> None:
 
 def render_project(project: dict[str, Any], index: int) -> None:
     render_html('<div class="work-card fade-up">')
-    video_col, text_col = st.columns([1.12, 0.88], gap="large")
+    video_col, text_col = st.columns([1.12, 0.88], gap="medium")
     with video_col:
-        if "vimeo.com" in project["video_url"]:
-            render_html(
-                f"""
-                <div class="work-placeholder">
-                    <p class="work-placeholder-title">{html.escape(project["title"])}</p>
-                    <p class="work-placeholder-copy">Das Showreel ist bewusst Teil der Bewerbung. In dieser Ansicht wird es als sauberer Showcase-Block mit direktem Vimeo-Link gezeigt.</p>
-                </div>
-                """
-            )
-        else:
-            render_video_player(project["video_url"], project["title"], height=390 if index == 0 else 330)
+        render_video_player(project["video_url"], project["title"], height=390 if index == 0 else 330)
     with text_col:
         render_html(f'<p class="work-label">{html.escape(project["category"])}</p>')
         render_html(f'<h3 class="work-title">{html.escape(project["title"])}</h3>')
