@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.2] - 2026-04-03
+
+- Removed `Clients` from the top navigation to keep the header cleaner.
+- Updated the contact section to `info@tim-heid.de` and `+4916099003145`, and removed the website field.
+- Compressed the selected-work layout with tighter typography, smaller action rows, and a denser video/text rhythm so the section reads shorter overall.
+- Snapshot: `docs/versions/assets/v0.7.2-home.png`
+- Rollback target: `v0.7.2`
+
 ## [v0.7.1] - 2026-04-03
 
 - Removed the three hero action buttons so the landing section stays quieter and more editorial.
