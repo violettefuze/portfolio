@@ -10,6 +10,15 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.0] - 2026-04-03
+
+- Reworked the portfolio around a FrameArt-inspired reading flow with fewer text blocks, stronger visual rhythm, and darker cinematic presentation.
+- Added hover effects, reveal motion, a marquee-style client-logo band, and a more fluid top-to-bottom page structure.
+- Replaced the selected-work lineup with the requested project set: FEUERLOFT first, then lux-Airport, Arthur Welter, La Provençale, the two wedding films, and the FrameArt showreel.
+- Added public client-logo assets sourced from the FrameArt website for portfolio-context presentation.
+- Snapshot: `docs/versions/assets/v0.7.0-home.png`
+- Rollback target: `v0.7.0`
+
 ## [v0.6.0] - 2026-04-03
 
 - Returned from the newer layout experiments to the earlier dark portfolio direction that better matched the preferred black visual style.
