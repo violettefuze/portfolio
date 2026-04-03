@@ -5,8 +5,10 @@ import html
 import json
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, urlparse
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,28 +31,105 @@ def render_html(markup: str) -> None:
     st.markdown(markup, unsafe_allow_html=True)
 
 
+def video_embed_url(url: str) -> str | None:
+    parsed = urlparse(url)
+    host = parsed.netloc.lower()
+
+    if "youtu.be" in host:
+        video_id = parsed.path.strip("/")
+        return f"https://www.youtube.com/embed/{video_id}?rel=0&modestbranding=1" if video_id else None
+
+    if "youtube.com" in host:
+        video_id = None
+        if parsed.path == "/watch":
+            video_id = parse_qs(parsed.query).get("v", [None])[0]
+        elif parsed.path.startswith("/embed/"):
+            video_id = parsed.path.split("/")[2]
+        elif parsed.path.startswith("/shorts/"):
+            video_id = parsed.path.split("/")[2]
+        return f"https://www.youtube.com/embed/{video_id}?rel=0&modestbranding=1" if video_id else None
+
+    if "vimeo.com" in host:
+        segments = [segment for segment in parsed.path.split("/") if segment]
+        video_id = next((segment for segment in segments if segment.isdigit()), None)
+        return f"https://player.vimeo.com/video/{video_id}" if video_id else None
+
+    return None
+
+
+def render_video_player(url: str, title: str, height: int = 360) -> None:
+    embed_url = video_embed_url(url)
+    if not embed_url:
+        st.link_button("Film öffnen", url, width="stretch")
+        return
+
+    safe_url = html.escape(embed_url, quote=True)
+    safe_title = html.escape(title)
+    components.html(
+        f"""
+        <style>
+            html, body {{
+                margin: 0;
+                background: transparent;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }}
+
+            .video-shell {{
+                width: 100%;
+                height: 100%;
+                border-radius: 26px;
+                overflow: hidden;
+                border: 1px solid rgba(201,176,137,0.14);
+                background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+                box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+            }}
+
+            iframe {{
+                width: 100%;
+                height: 100%;
+                border: 0;
+                display: block;
+            }}
+        </style>
+        <div class="video-shell">
+            <iframe
+                src="{safe_url}"
+                title="{safe_title}"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+            ></iframe>
+        </div>
+        """,
+        height=height,
+    )
+
+
 def inject_css() -> None:
     render_html(
         """
         <style>
         :root {
-            --bg: #161211;
-            --bg-elevated: #1d1817;
-            --panel: rgba(255, 255, 255, 0.028);
-            --panel-strong: rgba(255, 255, 255, 0.045);
-            --line: rgba(198, 178, 142, 0.16);
-            --line-strong: rgba(198, 178, 142, 0.32);
-            --text: #f1ebe2;
-            --muted: rgba(241, 235, 226, 0.70);
+            --bg: #141110;
+            --bg-soft: #1b1716;
+            --panel: rgba(255,255,255,0.028);
+            --panel-strong: rgba(255,255,255,0.046);
+            --line: rgba(201,176,137,0.14);
+            --line-strong: rgba(201,176,137,0.32);
+            --text: #f3ede4;
+            --muted: rgba(243,237,228,0.72);
             --gold: #c9b089;
-            --gold-soft: rgba(201, 176, 137, 0.16);
-            --shadow: 0 32px 72px rgba(0, 0, 0, 0.34);
+            --shadow: 0 30px 72px rgba(0,0,0,0.34);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .stApp {
             background:
-                radial-gradient(circle at top right, rgba(201, 176, 137, 0.08), transparent 22%),
-                linear-gradient(180deg, #151110 0%, #120f0f 100%);
+                radial-gradient(circle at top right, rgba(201,176,137,0.08), transparent 22%),
+                linear-gradient(180deg, #151110 0%, #110f0f 100%);
             color: var(--text);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
@@ -63,21 +142,19 @@ def inject_css() -> None:
             background: transparent;
         }
 
-        .block-container {
-            max-width: 1220px;
-            padding-top: 1.4rem;
-            padding-bottom: 5rem;
-        }
-
         [data-testid="stSidebar"] {
             display: none;
         }
 
-        [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stButton > button,
-        [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stDownloadButton > button,
+        .block-container {
+            max-width: 1230px;
+            padding-top: 1.1rem;
+            padding-bottom: 5rem;
+        }
+
         [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stLinkButton > a {
             width: 100%;
-            min-height: 3.1rem;
+            min-height: 3.05rem;
             border-radius: 999px;
             border: 1px solid var(--line-strong);
             background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
@@ -86,14 +163,13 @@ def inject_css() -> None:
             text-transform: uppercase;
             font-size: 0.72rem;
             text-decoration: none;
-            transition: 0.18s ease;
+            transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
             box-shadow: none;
         }
 
-        [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stButton > button:hover,
-        [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stDownloadButton > button:hover,
         [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stLinkButton > a:hover {
-            border-color: rgba(201, 176, 137, 0.45);
+            transform: translateY(-1px);
+            border-color: rgba(201,176,137,0.46);
             background: linear-gradient(180deg, rgba(201,176,137,0.18), rgba(255,255,255,0.03));
             color: var(--text);
         }
@@ -101,7 +177,22 @@ def inject_css() -> None:
         .site-shell {
             display: flex;
             flex-direction: column;
-            gap: 4.2rem;
+            gap: 4.4rem;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.82s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .topbar {
@@ -125,7 +216,6 @@ def inject_css() -> None:
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            flex: 0 0 auto;
         }
 
         .brand-logo img {
@@ -135,18 +225,10 @@ def inject_css() -> None:
             display: block;
         }
 
-        .brand-square {
-            width: 18px;
-            height: 18px;
-            border-radius: 4px;
-            background: linear-gradient(135deg, var(--gold), #f4ecdf);
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
-        }
-
         .brand-copy {
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+            gap: 0.14rem;
         }
 
         .brand-title {
@@ -167,7 +249,7 @@ def inject_css() -> None:
 
         .nav-copy {
             display: flex;
-            gap: 1.3rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
             color: var(--muted);
             font-size: 0.82rem;
@@ -177,9 +259,9 @@ def inject_css() -> None:
 
         .hero {
             position: relative;
-            border-radius: 34px;
+            min-height: 40rem;
+            border-radius: 38px;
             overflow: hidden;
-            min-height: 36rem;
             border: 1px solid var(--line);
             background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
             box-shadow: var(--shadow);
@@ -191,14 +273,19 @@ def inject_css() -> None:
             background-size: cover;
             background-position: center center;
             transform: scale(1.01);
+            transition: transform 8s ease;
+        }
+
+        .hero:hover .hero-media {
+            transform: scale(1.05);
         }
 
         .hero-scrim {
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(90deg, rgba(11,10,10,0.82) 0%, rgba(11,10,10,0.64) 38%, rgba(11,10,10,0.24) 100%),
-                linear-gradient(180deg, rgba(11,10,10,0.10) 0%, rgba(11,10,10,0.40) 100%);
+                linear-gradient(90deg, rgba(11,10,10,0.86) 0%, rgba(11,10,10,0.68) 38%, rgba(11,10,10,0.18) 100%),
+                linear-gradient(180deg, rgba(11,10,10,0.12) 0%, rgba(11,10,10,0.44) 100%);
         }
 
         .hero-content {
@@ -207,9 +294,9 @@ def inject_css() -> None:
             display: flex;
             flex-direction: column;
             justify-content: end;
-            min-height: 36rem;
+            min-height: 40rem;
             padding: 3rem;
-            max-width: 42rem;
+            max-width: 44rem;
         }
 
         .eyebrow {
@@ -222,59 +309,87 @@ def inject_css() -> None:
 
         .hero h1 {
             margin: 0;
-            font-size: clamp(3.4rem, 8vw, 6.2rem);
+            font-size: clamp(3.6rem, 8vw, 6.4rem);
             line-height: 0.92;
             letter-spacing: -0.04em;
             color: #fbf6ef;
         }
 
-        .hero-role {
+        .hero-statement {
             margin-top: 1rem;
-            font-size: 1.05rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: rgba(251, 246, 239, 0.86);
+            font-size: 1.28rem;
+            line-height: 1.32;
+            color: rgba(251,246,239,0.90);
+            max-width: 34rem;
         }
 
         .hero-copy {
-            margin-top: 1.3rem;
-            max-width: 34rem;
-            font-size: 1.06rem;
-            line-height: 1.8;
-            color: rgba(251, 246, 239, 0.78);
+            margin-top: 1.2rem;
+            max-width: 35rem;
+            font-size: 1rem;
+            line-height: 1.82;
+            color: rgba(251,246,239,0.78);
         }
 
-        .hero-strip {
+        .hero-note {
+            margin-top: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            border-radius: 999px;
+            border: 1px solid rgba(201,176,137,0.22);
+            background: rgba(201,176,137,0.09);
+            padding: 0.55rem 0.85rem;
+            color: rgba(251,246,239,0.84);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .statement-grid,
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1rem;
         }
 
-        .strip-card,
-        .process-card,
-        .background-card,
-        .skill-card {
-            border-radius: 24px;
+        .statement-card,
+        .skill-card,
+        .work-card,
+        .quote-panel,
+        .contact-panel {
+            border-radius: 26px;
             border: 1px solid var(--line);
             background: linear-gradient(180deg, var(--panel-strong), var(--panel));
-            padding: 1.35rem 1.4rem;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
         }
 
-        .strip-title,
-        .process-title,
-        .background-title,
-        .skill-title {
-            margin: 0 0 0.5rem 0;
-            font-size: 0.86rem;
-            letter-spacing: 0.18em;
+        .statement-card,
+        .skill-card {
+            padding: 1.35rem 1.4rem;
+            transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+        }
+
+        .statement-card:hover,
+        .skill-card:hover,
+        .work-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201,176,137,0.28);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.24);
+        }
+
+        .statement-label,
+        .section-label,
+        .skill-label,
+        .work-label,
+        .contact-label {
+            margin: 0 0 0.55rem 0;
+            font-size: 0.74rem;
+            letter-spacing: 0.24em;
             text-transform: uppercase;
             color: var(--gold);
         }
 
-        .strip-text,
-        .process-text,
-        .background-text,
+        .statement-text,
         .skill-text {
             margin: 0;
             color: var(--text);
@@ -282,17 +397,65 @@ def inject_css() -> None:
             font-size: 0.98rem;
         }
 
-        .section-label {
-            margin-bottom: 0.8rem;
-            font-size: 0.74rem;
-            letter-spacing: 0.26em;
-            text-transform: uppercase;
+        .logo-band {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow: hidden;
+        }
+
+        .logo-label {
+            margin: 0;
             color: var(--gold);
+            font-size: 0.74rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .logo-track {
+            display: flex;
+            gap: 1.1rem;
+            width: max-content;
+            animation: marquee 26s linear infinite;
+        }
+
+        .logo-band:hover .logo-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .logo-card {
+            width: 146px;
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 22px;
+            border: 1px solid rgba(201,176,137,0.12);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.018));
+            transition: transform 0.24s ease, background 0.24s ease;
+        }
+
+        .logo-card:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(180deg, rgba(201,176,137,0.09), rgba(255,255,255,0.02));
+        }
+
+        .logo-card img {
+            max-width: 88px;
+            max-height: 34px;
+            object-fit: contain;
+            display: block;
+            filter: grayscale(0%);
         }
 
         .section-heading {
             margin: 0;
-            font-size: clamp(2rem, 4vw, 3.3rem);
+            font-size: clamp(2rem, 4vw, 3.4rem);
             line-height: 1.02;
             letter-spacing: -0.03em;
             color: #faf5ed;
@@ -302,36 +465,66 @@ def inject_css() -> None:
             margin-top: 1rem;
             max-width: 42rem;
             color: var(--muted);
-            line-height: 1.85;
+            line-height: 1.8;
             font-size: 1rem;
         }
 
-        .project-wrap {
-            margin-top: 1.25rem;
-            padding: 1.2rem;
-            border-radius: 30px;
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+        .work-card {
+            padding: 1.25rem;
+            margin-top: 1.2rem;
+            transition: transform 0.26s ease, border-color 0.26s ease;
         }
 
-        .project-title {
+        .work-placeholder {
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 26px;
+            border: 1px solid rgba(201,176,137,0.14);
+            background:
+                radial-gradient(circle at top center, rgba(201,176,137,0.08), transparent 46%),
+                linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+            box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+            padding: 2rem;
+        }
+
+        .work-placeholder-title {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            line-height: 1.04;
             color: #faf5ed;
         }
 
-        .project-meta {
-            margin-top: 0.45rem;
+        .work-placeholder-copy {
+            margin-top: 0.9rem;
+            max-width: 24rem;
             color: var(--muted);
-            line-height: 1.7;
-            font-size: 0.96rem;
+            font-size: 0.98rem;
+            line-height: 1.75;
         }
 
-        .project-summary {
-            margin-top: 1rem;
+        .work-title {
+            margin: 0;
+            font-size: 1.9rem;
+            line-height: 1.02;
+            color: #faf5ed;
+        }
+
+        .work-role {
+            margin-top: 0.5rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .work-summary {
+            margin-top: 0.9rem;
             color: var(--text);
-            line-height: 1.85;
             font-size: 1rem;
+            line-height: 1.78;
         }
 
         .tag-row {
@@ -345,76 +538,38 @@ def inject_css() -> None:
             display: inline-flex;
             align-items: center;
             border-radius: 999px;
-            border: 1px solid rgba(201, 176, 137, 0.18);
-            background: rgba(201, 176, 137, 0.08);
+            border: 1px solid rgba(201,176,137,0.18);
+            background: rgba(201,176,137,0.08);
             padding: 0.42rem 0.72rem;
-            color: rgba(251, 246, 239, 0.86);
+            color: rgba(251,246,239,0.86);
             font-size: 0.82rem;
         }
 
-        .project-image {
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.06);
-            margin-bottom: 0.85rem;
-        }
-
-        .project-caption {
-            padding: 0.9rem 1rem;
-            border-radius: 18px;
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-            color: var(--muted);
-            font-size: 0.94rem;
-            line-height: 1.7;
-            margin-bottom: 0.85rem;
-        }
-
-        .statement {
-            padding: 4.5rem 2rem;
-            border-radius: 34px;
-            border: 1px solid var(--line);
-            background:
-                radial-gradient(circle at top center, rgba(201,176,137,0.09), transparent 38%),
-                linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+        .quote-panel {
+            padding: 3.8rem 2rem;
             text-align: center;
-            box-shadow: var(--shadow);
+            background:
+                radial-gradient(circle at top center, rgba(201,176,137,0.08), transparent 40%),
+                linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
         }
 
-        .statement-text {
-            max-width: 46rem;
+        .quote-text {
+            max-width: 44rem;
             margin: 0 auto;
             color: #faf5ed;
-            font-size: clamp(1.6rem, 3vw, 2.6rem);
-            line-height: 1.5;
+            font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+            line-height: 1.45;
         }
 
         .contact-panel {
-            border-radius: 30px;
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.018));
             padding: 2rem;
         }
 
-        .contact-label {
-            margin-bottom: 0.25rem;
-            font-size: 0.72rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
         .contact-value {
-            margin-bottom: 1rem;
+            margin: 0 0 1rem 0;
             color: var(--text);
             font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .helper-note {
-            color: var(--muted);
-            font-size: 0.92rem;
-            line-height: 1.7;
+            line-height: 1.72;
         }
 
         .site-link {
@@ -426,8 +581,9 @@ def inject_css() -> None:
             text-decoration: underline;
         }
 
-        @media (max-width: 900px) {
-            .hero-strip {
+        @media (max-width: 960px) {
+            .statement-grid,
+            .skills-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -437,11 +593,11 @@ def inject_css() -> None:
             }
 
             .hero {
-                min-height: 30rem;
+                min-height: 32rem;
             }
 
             .hero-content {
-                min-height: 30rem;
+                min-height: 32rem;
                 padding: 2rem;
             }
         }
@@ -452,19 +608,12 @@ def inject_css() -> None:
 
 def render_topbar(content: dict[str, Any]) -> None:
     site = content["site"]
-    brand_mark_path = ROOT / site["brand_mark"] if site.get("brand_mark") else None
-    brand_mark_uri = image_data_uri(brand_mark_path) if brand_mark_path else None
-    brand_visual = '<div class="brand-square"></div>'
-    if brand_mark_uri:
-        brand_visual = (
-            f'<div class="brand-logo"><img src="{brand_mark_uri}" '
-            f'alt="{html.escape(site["title"])} pictogram"></div>'
-        )
+    brand_mark_uri = image_data_uri(ROOT / site["brand_mark"])
     render_html(
         f"""
-        <div class="topbar">
+        <div class="topbar fade-up">
             <div class="brand-mark">
-                {brand_visual}
+                <div class="brand-logo"><img src="{brand_mark_uri}" alt="{html.escape(site["title"])} pictogram"></div>
                 <div class="brand-copy">
                     <p class="brand-title">{html.escape(site["title"])}</p>
                     <p class="brand-subtitle">{html.escape(site["subtitle"])}</p>
@@ -472,8 +621,9 @@ def render_topbar(content: dict[str, Any]) -> None:
             </div>
             <div class="nav-copy">
                 <span>Selected Work</span>
-                <span>Production Background</span>
-                <span>Direct Video Playback</span>
+                <span>Clients</span>
+                <span>Experience</span>
+                <span>Contact</span>
             </div>
         </div>
         """
@@ -488,156 +638,103 @@ def render_hero(content: dict[str, Any]) -> None:
     )
     render_html(
         f"""
-        <section class="hero">
+        <section class="hero fade-up">
             <div class="hero-media" style="{background_style}"></div>
             <div class="hero-scrim"></div>
             <div class="hero-content">
                 <div class="eyebrow">{html.escape(site["hero_kicker"])}</div>
                 <h1>{html.escape(site["title"])}</h1>
-                <div class="hero-role">{html.escape(site["subtitle"])}</div>
+                <div class="hero-statement">{html.escape(site["hero_statement"])}</div>
                 <div class="hero-copy">{html.escape(site["intro"])}</div>
+                <div class="hero-note">{html.escape(site["availability_note"])}</div>
             </div>
         </section>
         """
     )
 
-    c1, c2, c3 = st.columns([1.05, 1, 1], gap="small")
-    with c1:
-        if PDF_PATH.exists():
-            st.download_button(
-                "Bewerbungs-PDF",
-                PDF_PATH.read_bytes(),
-                file_name=PDF_PATH.name,
-                mime="application/pdf",
-                width="stretch",
-            )
-    with c2:
-        st.link_button("FrameArt Media", "https://frameart.lu", width="stretch")
-    with c3:
+    left, middle, right = st.columns(3, gap="small")
+    with left:
+        st.link_button("Bewerbungs-PDF", f"data:application/pdf;base64,{base64.b64encode(PDF_PATH.read_bytes()).decode('ascii')}", width="stretch")
+    with middle:
+        st.link_button("FrameArt", "https://frameart.lu", width="stretch")
+    with right:
         st.link_button("Website", content["contact"]["website"], width="stretch")
 
 
-def render_intro_strip(content: dict[str, Any]) -> None:
-    cards = [
-        {
-            "title": "Grundlage",
-            "text": "Professionelle Werbefilmproduktion als Fundament statt rein theoretischer Einstieg.",
-        },
-        {
-            "title": "Fokus",
-            "text": content["site"]["tagline"],
-        },
-        {
-            "title": "Ort",
-            "text": content["site"]["location"],
-        },
-    ]
-    markup = ['<div class="hero-strip">']
-    for card in cards:
-        markup.append(
-            f'<div class="strip-card"><p class="strip-title">{html.escape(card["title"])}</p>'
-            f'<p class="strip-text">{html.escape(card["text"])}</p></div>'
+def render_statements(content: dict[str, Any]) -> None:
+    cards = ['<div class="statement-grid fade-up">']
+    for text in content["statements"]:
+        cards.append(
+            f'<div class="statement-card"><p class="statement-label">Erfahrung</p>'
+            f'<p class="statement-text">{html.escape(text)}</p></div>'
         )
-    markup.append("</div>")
-    render_html("".join(markup))
+    cards.append("</div>")
+    render_html("".join(cards))
 
 
-def render_about(content: dict[str, Any]) -> None:
-    about = content["about"]
-    render_html('<div class="section-label">Profil</div>')
-    render_html(f'<h2 class="section-heading">{html.escape(about["headline"])}</h2>')
-    cols = st.columns([1.18, 0.82], gap="large")
-    with cols[0]:
-        for paragraph in about["paragraphs"]:
-            render_html(f'<p class="section-copy">{html.escape(paragraph)}</p>')
-    with cols[1]:
-        facts_markup = ['<div class="skill-card">', '<p class="skill-title">Kurzprofil</p>']
-        for fact in about["facts"]:
-            facts_markup.append(f'<p class="skill-text">• {html.escape(fact)}</p>')
-        facts_markup.append("</div>")
-        render_html("".join(facts_markup))
-
-
-def render_process(content: dict[str, Any]) -> None:
-    render_html('<div class="section-label">Arbeitsweise</div>')
-    render_html('<h2 class="section-heading">Produktionslogik statt reines Selbstmarketing.</h2>')
+def render_partner_logos(content: dict[str, Any]) -> None:
+    logos_markup = []
+    for partner in content["partners"]:
+        logo_uri = image_data_uri(ROOT / partner["logo"])
+        logos_markup.append(
+            f'<div class="logo-card"><img src="{logo_uri}" alt="{html.escape(partner["name"])}"></div>'
+        )
+    repeated = "".join(logos_markup + logos_markup)
     render_html(
-        '<p class="section-copy">Die Struktur ist von einer Produktionswebsite inspiriert: klar, reduziert und auf echte Arbeit ausgerichtet. Nicht als Kopie von FrameArt, sondern als persönliche Übersetzung auf dein Profil.</p>'
+        f"""
+        <section class="logo-band fade-up">
+            <p class="logo-label">Kunden aus dem FrameArt-Umfeld</p>
+            <div class="logo-track">{repeated}</div>
+        </section>
+        """
     )
-    cols = st.columns(3, gap="large")
-    for col, item in zip(cols, content["process"]):
-        with col:
+
+
+def render_selected_work_intro() -> None:
+    render_html('<div class="section-label">Selected Work</div>')
+    render_html('<h2 class="section-heading">Von oben nach unten lesbar. Erst Wirkung, dann Details.</h2>')
+    render_html(
+        '<p class="section-copy">Weniger Text, klarere Aussagen und Arbeiten, die zeigen, wie breit das Produktionswissen wirklich ist: FrameArt-Produktionen, Corporate-Arbeit und eigene Filme mit kompletter Verantwortung.</p>'
+    )
+
+
+def render_project(project: dict[str, Any], index: int) -> None:
+    render_html('<div class="work-card fade-up">')
+    video_col, text_col = st.columns([1.12, 0.88], gap="large")
+    with video_col:
+        if "vimeo.com" in project["video_url"]:
             render_html(
                 f"""
-                <div class="process-card">
-                    <p class="process-title">{html.escape(item["title"])}</p>
-                    <p class="process-text">{html.escape(item["text"])}</p>
+                <div class="work-placeholder">
+                    <p class="work-placeholder-title">{html.escape(project["title"])}</p>
+                    <p class="work-placeholder-copy">Das Showreel ist bewusst Teil der Bewerbung. In dieser Ansicht wird es als sauberer Showcase-Block mit direktem Vimeo-Link gezeigt.</p>
                 </div>
                 """
             )
-
-
-def render_project_media(project: dict[str, Any]) -> None:
-    hero_image = project.get("hero_image")
-    if hero_image:
-        render_html('<div class="project-image">')
-        st.image(str(ROOT / hero_image), width="stretch")
-        render_html("</div>")
-
-    if project.get("stills"):
-        gallery = st.columns(len(project["stills"]), gap="small")
-        for col, still in zip(gallery, project["stills"]):
-            with col:
-                st.image(str(ROOT / still), width="stretch")
-        st.write("")
-
-    if not hero_image and not project.get("stills"):
-        render_html(
-            f'<div class="project-caption">{html.escape(project["category"])} · {html.escape(project["role"])}</div>'
-        )
-
-    st.video(project["video_url"])
-
-
-def render_project_details(project: dict[str, Any]) -> None:
-    render_html(f'<h3 class="project-title">{html.escape(project["title"])}</h3>')
-    render_html(
-        f'<div class="project-meta">{html.escape(project["category"])} · {html.escape(project["role"])}</div>'
-    )
-    render_html(f'<div class="project-summary">{html.escape(project["summary"])}</div>')
-
-    tags = "".join(f'<span class="tag">{html.escape(note)}</span>' for note in project.get("notes", []))
-    render_html(f'<div class="tag-row">{tags}</div>')
-    st.write("")
-    st.link_button("Original öffnen", project["video_url"], width="stretch")
-
-
-def render_projects(content: dict[str, Any]) -> None:
-    render_html('<div class="section-label">Selected Work</div>')
-    render_html('<h2 class="section-heading">Projekte mit direkter Wiedergabe.</h2>')
-    render_html(
-        '<p class="section-copy">Die Videos lassen sich direkt in der Seite abspielen. Damit wirkt die Bewerbung weniger wie ein PDF-Anhang und mehr wie ein kontrolliertes Portfolio, das man sofort ansehen kann.</p>'
-    )
-
-    for index, project in enumerate(content["projects"]):
-        render_html('<div class="project-wrap">')
-        left, right = st.columns([1.06, 0.94], gap="large")
-        if index % 2 == 0:
-            media_col, detail_col = left, right
         else:
-            media_col, detail_col = right, left
-        with media_col:
-            render_project_media(project)
-        with detail_col:
-            render_project_details(project)
-        render_html("</div>")
+            render_video_player(project["video_url"], project["title"], height=390 if index == 0 else 330)
+    with text_col:
+        render_html(f'<p class="work-label">{html.escape(project["category"])}</p>')
+        render_html(f'<h3 class="work-title">{html.escape(project["title"])}</h3>')
+        render_html(f'<p class="work-role">{html.escape(project["role"])}</p>')
+        render_html(f'<p class="work-summary">{html.escape(project["summary"])}</p>')
+        notes = "".join(f'<span class="tag">{html.escape(note)}</span>' for note in project.get("notes", []))
+        render_html(f'<div class="tag-row">{notes}</div>')
+        st.link_button("Original öffnen", project["video_url"], width="stretch")
+    render_html("</div>")
 
 
-def render_background(content: dict[str, Any]) -> None:
+def render_selected_work(content: dict[str, Any]) -> None:
+    render_selected_work_intro()
+    for index, project in enumerate(content["projects"]):
+        render_project(project, index)
+
+
+def render_experience(content: dict[str, Any]) -> None:
     render_html('<div class="section-label">Background</div>')
-    render_html('<h2 class="section-heading">Woher die Arbeit kommt.</h2>')
+    render_html('<h2 class="section-heading">Lehre, Set-Erfahrung, eigene GmbH.</h2>')
     render_html(
-        '<p class="section-copy">Die Stärke deiner Seite sollte nicht darin liegen, eine Agentur zu imitieren, sondern zu zeigen, aus welchem professionellen Umfeld dein Blick entstanden ist und wie du ihn heute eigenständig weiterführst.</p>'
+        '<p class="section-copy">Die Kombination aus Lehre bei FrameArt Media, europaweiter Produktionspraxis und späterer Verantwortung als Gesellschafter und Geschäftsführer sorgt dafür, dass Kamera, Licht, Ton, Postproduktion und Kundenlogik zusammen gedacht werden.</p>'
     )
 
     cols = st.columns(3, gap="large")
@@ -646,14 +743,13 @@ def render_background(content: dict[str, Any]) -> None:
             link_markup = ""
             if item.get("link_url"):
                 link_markup = (
-                    f'<p class="helper-note"><a class="site-link" href="{html.escape(item["link_url"])}" target="_blank">'
-                    f'{html.escape(item["link_label"])}</a></p>'
+                    f'<p class="site-link" style="margin-top:0.8rem;"><a class="site-link" href="{html.escape(item["link_url"], quote=True)}" target="_blank">{html.escape(item["link_label"])}</a></p>'
                 )
             render_html(
                 f"""
-                <div class="background-card">
-                    <p class="background-title">{html.escape(item["title"])}</p>
-                    <p class="background-text">{html.escape(item["text"])}</p>
+                <div class="statement-card fade-up">
+                    <p class="statement-label">{html.escape(item["title"])}</p>
+                    <p class="statement-text">{html.escape(item["text"])}</p>
                     {link_markup}
                 </div>
                 """
@@ -662,33 +758,33 @@ def render_background(content: dict[str, Any]) -> None:
 
 def render_skills(content: dict[str, Any]) -> None:
     skills = content["skills"]
-    render_html('<div class="section-label">Technik</div>')
-    render_html('<h2 class="section-heading">Werkzeuge und Schwerpunkt.</h2>')
-    left, right = st.columns(2, gap="large")
-    with left:
-        camera_markup = ['<div class="skill-card">', '<p class="skill-title">Kamera</p>']
-        for item in skills["camera"]:
-            camera_markup.append(f'<p class="skill-text">• {html.escape(item)}</p>')
-        camera_markup.append("</div>")
-        render_html("".join(camera_markup))
-    with right:
-        post_markup = ['<div class="skill-card">', '<p class="skill-title">Postproduktion</p>']
-        for item in skills["postproduction"]:
-            post_markup.append(f'<p class="skill-text">• {html.escape(item)}</p>')
-        post_markup.append(f'<p class="helper-note">{html.escape(skills["focus"])}</p>')
-        post_markup.append("</div>")
-        render_html("".join(post_markup))
+    render_html('<div class="section-label">Tools & Craft</div>')
+    render_html('<h2 class="section-heading">Moderne Filmkameras, Ton, Licht und Post.</h2>')
+    render_html(f'<p class="section-copy">{html.escape(skills["focus"])}</p>')
+
+    groups = [
+        ("Kamera", skills["camera"]),
+        ("Ton & Licht", skills["sound"] + skills["lighting"]),
+        ("Postproduktion", skills["postproduction"]),
+    ]
+    markup = ['<div class="skills-grid fade-up">']
+    for title, items in groups:
+        pills = "".join(f'<span class="tag">{html.escape(item)}</span>' for item in items)
+        markup.append(
+            f'<div class="skill-card"><p class="skill-label">{html.escape(title)}</p>'
+            f'<div class="tag-row">{pills}</div></div>'
+        )
+    markup.append("</div>")
+    render_html("".join(markup))
 
 
-def render_statement() -> None:
-    render_html('<div class="section-label">Statement</div>')
+def render_quote() -> None:
     render_html(
         """
-        <div class="statement">
-            <div class="statement-text">
-                Viele Filme sind technisch sauber,<br>
-                aber austauschbar.<br><br>
-                Genau das interessiert mich nicht.
+        <div class="quote-panel fade-up">
+            <div class="quote-text">
+                Ich kenne Produktion nicht nur aus einer Rolle.<br>
+                Ich kenne sie von der Lehre bis zur Geschäftsführung.
             </div>
         </div>
         """
@@ -698,26 +794,23 @@ def render_statement() -> None:
 def render_contact(content: dict[str, Any]) -> None:
     site = content["site"]
     contact = content["contact"]
-    render_html('<div class="section-label">Kontakt</div>')
     left, right = st.columns([0.95, 1.05], gap="large")
     with left:
+        render_html('<div class="section-label">Kontakt</div>')
         render_html(f'<h2 class="section-heading">{html.escape(site["title"])}</h2>')
         render_html(f'<p class="section-copy">{html.escape(site["subtitle"])}<br>{html.escape(site["location"])}</p>')
     with right:
-        render_html('<div class="contact-panel">')
+        render_html('<div class="contact-panel fade-up">')
         render_html('<div class="contact-label">Mail</div>')
-        render_html(f'<div class="contact-value">{html.escape(contact["email"])}</div>')
+        render_html(f'<p class="contact-value">{html.escape(contact["email"])}</p>')
         render_html('<div class="contact-label">Telefon</div>')
-        render_html(f'<div class="contact-value">{html.escape(contact["phone"])}</div>')
+        render_html(f'<p class="contact-value">{html.escape(contact["phone"])}</p>')
         render_html('<div class="contact-label">Website</div>')
         render_html(
-            f'<div class="contact-value"><a class="site-link" href="{html.escape(contact["website"])}" target="_blank">{html.escape(contact["website"])}</a></div>'
+            f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
         )
-        if contact.get("instagram"):
-            render_html('<div class="contact-label">Instagram</div>')
-            render_html(f'<div class="contact-value">{html.escape(contact["instagram"])}</div>')
-        render_html(f'<p class="helper-note">{html.escape(contact["note"])}</p>')
-        render_html("</div>")
+        render_html(f'<p class="contact-value">{html.escape(contact["note"])}</p>')
+        render_html('</div>')
 
 
 def main() -> None:
@@ -730,18 +823,18 @@ def main() -> None:
 
     content = load_content()
     inject_css()
+
     render_html('<div class="site-shell">')
     render_topbar(content)
     render_hero(content)
-    render_intro_strip(content)
-    render_about(content)
-    render_process(content)
-    render_projects(content)
-    render_background(content)
+    render_statements(content)
+    render_partner_logos(content)
+    render_selected_work(content)
+    render_experience(content)
     render_skills(content)
-    render_statement()
+    render_quote()
     render_contact(content)
-    render_html("</div>")
+    render_html('</div>')
 
 
 if __name__ == "__main__":
