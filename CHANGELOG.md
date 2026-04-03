@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.6] - 2026-04-03
+
+- Added subtle premium motion cues with a desktop hero parallax feel and a more atmospheric highlight treatment.
+- Turned the top navigation into a soft glass-style sticky bar and introduced light glass accents to key panels without changing the dark cinematic direction.
+- Refined the selected-work film strip with hover lift and soft edge fades to make the horizontal scroll feel more intentional.
+- Snapshot: `docs/versions/assets/v0.7.6-home.png`
+- Rollback target: `v0.7.6`
+
 ## [v0.7.5] - 2026-04-03
 
 - Expanded the camera list with additional RED bodies and a Canon Cinema EOS entry.
