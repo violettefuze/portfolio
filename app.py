@@ -209,14 +209,37 @@ def inject_css() -> None:
             justify-content: space-between;
             align-items: center;
             gap: 1.8rem;
-            padding: 0.55rem 0 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            position: sticky;
+            top: 1rem;
+            z-index: 30;
+            padding: 0.9rem 1.35rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(24,20,19,0.72), rgba(24,20,19,0.48));
+            box-shadow: 0 18px 36px rgba(0,0,0,0.18);
+            backdrop-filter: blur(20px) saturate(135%);
+            -webkit-backdrop-filter: blur(20px) saturate(135%);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .topbar::before {
+            content: "";
+            position: absolute;
+            inset: 1px 1px auto 1px;
+            height: 56%;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+            pointer-events: none;
+            z-index: 0;
         }
 
         .brand-mark {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .brand-logo {
@@ -264,6 +287,8 @@ def inject_css() -> None:
             font-size: 0.8rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
+            position: relative;
+            z-index: 1;
         }
 
         .hero {
@@ -276,11 +301,24 @@ def inject_css() -> None:
             box-shadow: var(--shadow);
         }
 
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 78% 16%, rgba(255,255,255,0.18), transparent 24%),
+                linear-gradient(180deg, rgba(255,255,255,0.08), transparent 26%);
+            opacity: 0.45;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
         .hero-media {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center center;
+            background-position: center top;
+            background-attachment: fixed;
             transform: scale(1.01);
             transition: transform 8s ease;
         }
@@ -370,6 +408,32 @@ def inject_css() -> None:
             border: 1px solid var(--line);
             background: linear-gradient(180deg, var(--panel-strong), var(--panel));
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        .statement-card,
+        .skill-card,
+        .quote-panel,
+        .contact-panel,
+        .logo-card {
+            position: relative;
+            backdrop-filter: blur(16px) saturate(125%);
+            -webkit-backdrop-filter: blur(16px) saturate(125%);
+            isolation: isolate;
+        }
+
+        .statement-card::before,
+        .skill-card::before,
+        .quote-panel::before,
+        .contact-panel::before,
+        .logo-card::before {
+            content: "";
+            position: absolute;
+            inset: 1px 1px auto 1px;
+            height: 42%;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0));
+            pointer-events: none;
+            z-index: 0;
         }
 
         .statement-card,
@@ -617,6 +681,8 @@ def inject_css() -> None:
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
+                position: static;
+                border-radius: 30px;
             }
 
             .hero {
@@ -626,6 +692,10 @@ def inject_css() -> None:
             .hero-content {
                 min-height: 35rem;
                 padding: 2.35rem;
+            }
+
+            .hero-media {
+                background-attachment: scroll;
             }
 
             .hero h1 {
@@ -773,6 +843,7 @@ def render_selected_work(content: dict[str, Any]) -> None:
                 flex-direction: column;
                 gap: 1.15rem;
                 padding-top: 0.35rem;
+                position: relative;
             }}
 
             .slider-note {{
@@ -781,6 +852,31 @@ def render_selected_work(content: dict[str, Any]) -> None:
                 font-size: 0.8rem;
                 letter-spacing: 0.14em;
                 text-transform: uppercase;
+            }}
+
+            .slider-track-wrap {{
+                position: relative;
+            }}
+
+            .slider-track-wrap::before,
+            .slider-track-wrap::after {{
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0.75rem;
+                width: 42px;
+                z-index: 3;
+                pointer-events: none;
+            }}
+
+            .slider-track-wrap::before {{
+                left: 0;
+                background: linear-gradient(90deg, rgba(17,15,15,0.98), rgba(17,15,15,0));
+            }}
+
+            .slider-track-wrap::after {{
+                right: 0;
+                background: linear-gradient(270deg, rgba(17,15,15,0.98), rgba(17,15,15,0));
             }}
 
             .slider-track {{
@@ -811,6 +907,13 @@ def render_selected_work(content: dict[str, Any]) -> None:
                 background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
                 overflow: hidden;
                 box-shadow: 0 18px 46px rgba(0,0,0,0.2);
+                transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+            }}
+
+            .slider-card:hover {{
+                transform: translateY(-4px);
+                border-color: rgba(201,176,137,0.26);
+                box-shadow: 0 24px 58px rgba(0,0,0,0.24);
             }}
 
             .slider-video-shell {{
@@ -897,6 +1000,11 @@ def render_selected_work(content: dict[str, Any]) -> None:
             }}
 
             @media (max-width: 720px) {{
+                .slider-track-wrap::before,
+                .slider-track-wrap::after {{
+                    width: 24px;
+                }}
+
                 .slider-track {{
                     grid-auto-columns: 92%;
                 }}
@@ -904,8 +1012,10 @@ def render_selected_work(content: dict[str, Any]) -> None:
         </style>
         <div class="slider-shell">
             <p class="slider-note">Drei Projekte im Blick. Seitlich scrollen für mehr.</p>
-            <div class="slider-track">
-                {"".join(cards)}
+            <div class="slider-track-wrap">
+                <div class="slider-track">
+                    {"".join(cards)}
+                </div>
             </div>
         </div>
         """,
