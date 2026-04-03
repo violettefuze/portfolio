@@ -98,21 +98,6 @@
   },
   "projects": [
     {
-      "slug": "drone-study",
-      "title": "Aerial Study",
-      "category": "Freies Projekt",
-      "role": "Drohne, Kamera, Schnitt",
-      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
-      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
-      "hero_image": "assets/images/hero_alps_panorama.jpg",
-      "stills": [],
-      "notes": [
-        "Persönliche Arbeit",
-        "Bildruhe statt Effekthascherei",
-        "Starker Blick für Geometrie und Raum"
-      ]
-    },
-    {
       "slug": "saarschleife",
       "title": "Saarschleife, Deutschland",
       "category": "Hochzeitsfilm",
@@ -129,6 +114,21 @@
         "Nähe, Emotion, Beobachtung",
         "Weniger Inszenierung, mehr Mensch",
         "Location als Stimmungsträger statt nur Kulisse"
+      ]
+    },
+    {
+      "slug": "drone-study",
+      "title": "Aerial Study",
+      "category": "Freies Projekt",
+      "role": "Drohne, Kamera, Schnitt",
+      "summary": "In der Freizeit entstanden – mit Fokus auf starke Perspektiven, Raumgefühl und ruhige Bildführung.",
+      "video_url": "https://www.youtube.com/watch?v=GJzibISPBwU",
+      "hero_image": "assets/images/hero_alps_panorama.jpg",
+      "stills": [],
+      "notes": [
+        "Persönliche Arbeit",
+        "Bildruhe statt Effekthascherei",
+        "Starker Blick für Geometrie und Raum"
       ]
     },
     {
