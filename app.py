@@ -119,6 +119,22 @@ def inject_css() -> None:
             gap: 0.85rem;
         }
 
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
         .brand-square {
             width: 18px;
             height: 18px;
@@ -436,11 +452,19 @@ def inject_css() -> None:
 
 def render_topbar(content: dict[str, Any]) -> None:
     site = content["site"]
+    brand_mark_path = ROOT / site["brand_mark"] if site.get("brand_mark") else None
+    brand_mark_uri = image_data_uri(brand_mark_path) if brand_mark_path else None
+    brand_visual = '<div class="brand-square"></div>'
+    if brand_mark_uri:
+        brand_visual = (
+            f'<div class="brand-logo"><img src="{brand_mark_uri}" '
+            f'alt="{html.escape(site["title"])} pictogram"></div>'
+        )
     render_html(
         f"""
         <div class="topbar">
             <div class="brand-mark">
-                <div class="brand-square"></div>
+                {brand_visual}
                 <div class="brand-copy">
                     <p class="brand-title">{html.escape(site["title"])}</p>
                     <p class="brand-subtitle">{html.escape(site["subtitle"])}</p>
@@ -511,12 +535,8 @@ def render_intro_strip(content: dict[str, Any]) -> None:
     markup = ['<div class="hero-strip">']
     for card in cards:
         markup.append(
-            f"""
-            <div class="strip-card">
-                <p class="strip-title">{html.escape(card["title"])}</p>
-                <p class="strip-text">{html.escape(card["text"])}</p>
-            </div>
-            """
+            f'<div class="strip-card"><p class="strip-title">{html.escape(card["title"])}</p>'
+            f'<p class="strip-text">{html.escape(card["text"])}</p></div>'
         )
     markup.append("</div>")
     render_html("".join(markup))
