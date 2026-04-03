@@ -10,6 +10,13 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.3] - 2026-04-03
+
+- Rebuilt selected work into a horizontal film-strip slider with three visible cards on desktop and the remaining projects available via sideways scrolling.
+- Removed the selected-work hashtags/tags and tightened the project cards so the whole section feels shorter and cleaner.
+- Snapshot: `docs/versions/assets/v0.7.3-home.png`
+- Rollback target: `v0.7.3`
+
 ## [v0.7.2] - 2026-04-03
 
 - Removed `Clients` from the top navigation to keep the header cleaner.
