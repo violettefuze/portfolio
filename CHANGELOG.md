@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.5.0] - 2026-04-03
+
+- Moved away from the Apple-style landing page and returned to a more standard, calmer portfolio structure closer to the earlier preferred version.
+- Repositioned the main text directly inside the new panorama hero so the typography sits more intentionally within the image composition.
+- Simplified the page order again: hero, overview, profile, process, selected work, background, skills, statement, and contact.
+- Snapshot: `docs/versions/assets/v0.5.0-home.png`
+- Rollback target: `v0.5.0`
+
 ## [v0.4.0] - 2026-04-03
 
 - Rebuilt the homepage into a cleaner, Apple-inspired landing page with stronger typography, softer spacing, curated grouping, and motion-focused presentation.
