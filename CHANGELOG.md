@@ -10,6 +10,15 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.4.0] - 2026-04-03
+
+- Rebuilt the homepage into a cleaner, Apple-inspired landing page with stronger typography, softer spacing, curated grouping, and motion-focused presentation.
+- Replaced the old landing image with the uploaded panorama without the black bar and used it for the new hero and parallax band.
+- Added a featured reel section around the provided YouTube link, plus a review section based on public Google-review data mirrored by Trustindex.
+- Added data support for future partner-logo placement so collaboration logos can be integrated later without another structural rewrite.
+- Snapshot: `docs/versions/assets/v0.4.0-home.png`
+- Rollback target: `v0.4.0`
+
 ## [v0.3.0] - 2026-04-03
 
 - Reframed the homepage into a more editorial, production-style portfolio layout with clearer sections for background, process, and selected work.
