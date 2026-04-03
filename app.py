@@ -154,9 +154,11 @@ def inject_css() -> None:
         }
 
         .block-container {
-            max-width: 1230px;
-            padding-top: 1.1rem;
-            padding-bottom: 5rem;
+            max-width: 1380px;
+            padding-top: 1.55rem;
+            padding-bottom: 6.5rem;
+            padding-left: clamp(1.4rem, 3vw, 2.6rem);
+            padding-right: clamp(1.4rem, 3vw, 2.6rem);
         }
 
         [data-testid="stVerticalBlock"] > [data-testid="element-container"] div.stLinkButton > a {
@@ -184,7 +186,7 @@ def inject_css() -> None:
         .site-shell {
             display: flex;
             flex-direction: column;
-            gap: 4.4rem;
+            gap: 5.35rem;
         }
 
         .fade-up {
@@ -206,20 +208,20 @@ def inject_css() -> None:
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1.5rem;
-            padding: 0.4rem 0 0.2rem 0;
+            gap: 1.8rem;
+            padding: 0.55rem 0 1rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
 
         .brand-mark {
             display: inline-flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 1rem;
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -235,12 +237,12 @@ def inject_css() -> None:
         .brand-copy {
             display: flex;
             flex-direction: column;
-            gap: 0.14rem;
+            gap: 0.2rem;
         }
 
         .brand-title {
             margin: 0;
-            font-size: 0.94rem;
+            font-size: 1rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--text);
@@ -248,7 +250,7 @@ def inject_css() -> None:
 
         .brand-subtitle {
             margin: 0;
-            font-size: 0.75rem;
+            font-size: 0.79rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--muted);
@@ -256,18 +258,18 @@ def inject_css() -> None:
 
         .nav-copy {
             display: flex;
-            gap: 1.2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             color: var(--muted);
-            font-size: 0.82rem;
-            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
         .hero {
             position: relative;
-            min-height: 40rem;
-            border-radius: 38px;
+            min-height: 43rem;
+            border-radius: 42px;
             overflow: hidden;
             border: 1px solid var(--line);
             background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
@@ -301,54 +303,54 @@ def inject_css() -> None:
             display: flex;
             flex-direction: column;
             justify-content: end;
-            min-height: 40rem;
-            padding: 3rem;
-            max-width: 44rem;
+            min-height: 43rem;
+            padding: 3.65rem;
+            max-width: 47rem;
         }
 
         .eyebrow {
-            margin: 0 0 1rem 0;
-            font-size: 0.76rem;
-            letter-spacing: 0.28em;
+            margin: 0 0 1.2rem 0;
+            font-size: 0.8rem;
+            letter-spacing: 0.32em;
             text-transform: uppercase;
             color: var(--gold);
         }
 
         .hero h1 {
             margin: 0;
-            font-size: clamp(3.6rem, 8vw, 6.4rem);
+            font-size: clamp(4.2rem, 8.2vw, 7.25rem);
             line-height: 0.92;
             letter-spacing: -0.04em;
             color: #fbf6ef;
         }
 
         .hero-statement {
-            margin-top: 1rem;
-            font-size: 1.28rem;
-            line-height: 1.32;
+            margin-top: 1.15rem;
+            font-size: 1.38rem;
+            line-height: 1.34;
             color: rgba(251,246,239,0.90);
-            max-width: 34rem;
+            max-width: 36rem;
         }
 
         .hero-copy {
-            margin-top: 1.2rem;
-            max-width: 35rem;
-            font-size: 1rem;
-            line-height: 1.82;
+            margin-top: 1.35rem;
+            max-width: 38rem;
+            font-size: 1.04rem;
+            line-height: 1.88;
             color: rgba(251,246,239,0.78);
         }
 
         .hero-note {
-            margin-top: 1.1rem;
+            margin-top: 1.35rem;
             display: inline-flex;
             align-items: center;
             width: fit-content;
             border-radius: 999px;
             border: 1px solid rgba(201,176,137,0.22);
             background: rgba(201,176,137,0.09);
-            padding: 0.55rem 0.85rem;
+            padding: 0.62rem 0.98rem;
             color: rgba(251,246,239,0.84);
-            font-size: 0.8rem;
+            font-size: 0.84rem;
             line-height: 1.4;
         }
 
@@ -356,7 +358,7 @@ def inject_css() -> None:
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
+            gap: 1.18rem;
         }
 
         .statement-card,
@@ -372,7 +374,7 @@ def inject_css() -> None:
 
         .statement-card,
         .skill-card {
-            padding: 1.35rem 1.4rem;
+            padding: 1.58rem 1.62rem;
             transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
         }
 
@@ -388,9 +390,9 @@ def inject_css() -> None:
         .skill-label,
         .work-label,
         .contact-label {
-            margin: 0 0 0.55rem 0;
-            font-size: 0.74rem;
-            letter-spacing: 0.24em;
+            margin: 0 0 0.72rem 0;
+            font-size: 0.76rem;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
             color: var(--gold);
         }
@@ -399,28 +401,29 @@ def inject_css() -> None:
         .skill-text {
             margin: 0;
             color: var(--text);
-            line-height: 1.7;
-            font-size: 0.98rem;
+            line-height: 1.82;
+            font-size: 1.02rem;
         }
 
         .logo-band {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
             overflow: hidden;
+            padding-top: 0.2rem;
         }
 
         .logo-label {
             margin: 0;
             color: var(--gold);
-            font-size: 0.74rem;
-            letter-spacing: 0.24em;
+            font-size: 0.76rem;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
         }
 
         .logo-track {
             display: flex;
-            gap: 1.1rem;
+            gap: 1.35rem;
             width: max-content;
             animation: marquee 26s linear infinite;
         }
@@ -435,12 +438,12 @@ def inject_css() -> None:
         }
 
         .logo-card {
-            width: 146px;
-            height: 78px;
+            width: 156px;
+            height: 84px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 22px;
+            border-radius: 24px;
             border: 1px solid rgba(201,176,137,0.12);
             background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.018));
             transition: transform 0.24s ease, background 0.24s ease;
@@ -452,8 +455,8 @@ def inject_css() -> None:
         }
 
         .logo-card img {
-            max-width: 88px;
-            max-height: 34px;
+            max-width: 96px;
+            max-height: 38px;
             object-fit: contain;
             display: block;
             filter: grayscale(0%);
@@ -461,18 +464,18 @@ def inject_css() -> None:
 
         .section-heading {
             margin: 0;
-            font-size: clamp(2rem, 4vw, 3.4rem);
-            line-height: 1.02;
+            font-size: clamp(2.35rem, 4.4vw, 3.95rem);
+            line-height: 1.04;
             letter-spacing: -0.03em;
             color: #faf5ed;
         }
 
         .section-copy {
-            margin-top: 1rem;
-            max-width: 42rem;
+            margin-top: 1.15rem;
+            max-width: 46rem;
             color: var(--muted);
-            line-height: 1.8;
-            font-size: 1rem;
+            line-height: 1.9;
+            font-size: 1.04rem;
         }
 
         .work-card {
@@ -552,7 +555,7 @@ def inject_css() -> None:
         }
 
         .quote-panel {
-            padding: 3.8rem 2rem;
+            padding: 4.5rem 2.7rem;
             text-align: center;
             background:
                 radial-gradient(circle at top center, rgba(201,176,137,0.08), transparent 40%),
@@ -560,22 +563,22 @@ def inject_css() -> None:
         }
 
         .quote-text {
-            max-width: 44rem;
+            max-width: 48rem;
             margin: 0 auto;
             color: #faf5ed;
-            font-size: clamp(1.5rem, 2.8vw, 2.5rem);
-            line-height: 1.45;
+            font-size: clamp(1.7rem, 3vw, 2.85rem);
+            line-height: 1.48;
         }
 
         .contact-panel {
-            padding: 2rem;
+            padding: 2.45rem;
         }
 
         .contact-value {
-            margin: 0 0 1rem 0;
+            margin: 0 0 1.12rem 0;
             color: var(--text);
-            font-size: 1rem;
-            line-height: 1.72;
+            font-size: 1.02rem;
+            line-height: 1.78;
         }
 
         .site-link {
@@ -593,18 +596,34 @@ def inject_css() -> None:
                 grid-template-columns: 1fr;
             }
 
+            .site-shell {
+                gap: 4.1rem;
+            }
+
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
             .hero {
-                min-height: 32rem;
+                min-height: 35rem;
             }
 
             .hero-content {
-                min-height: 32rem;
-                padding: 2rem;
+                min-height: 35rem;
+                padding: 2.35rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(3.4rem, 12vw, 5rem);
+            }
+
+            .hero-statement {
+                font-size: 1.18rem;
+            }
+
+            .section-heading {
+                font-size: clamp(2.1rem, 7vw, 3rem);
             }
         }
         </style>
@@ -738,24 +757,25 @@ def render_selected_work(content: dict[str, Any]) -> None:
             .slider-shell {{
                 display: flex;
                 flex-direction: column;
-                gap: 0.85rem;
+                gap: 1.15rem;
+                padding-top: 0.35rem;
             }}
 
             .slider-note {{
                 margin: 0;
                 color: rgba(243,237,228,0.54);
-                font-size: 0.76rem;
-                letter-spacing: 0.12em;
+                font-size: 0.8rem;
+                letter-spacing: 0.14em;
                 text-transform: uppercase;
             }}
 
             .slider-track {{
                 display: grid;
                 grid-auto-flow: column;
-                grid-auto-columns: calc((100% - 2rem) / 3);
-                gap: 1rem;
+                grid-auto-columns: calc((100% - 2.5rem) / 3);
+                gap: 1.25rem;
                 overflow-x: auto;
-                padding-bottom: 0.6rem;
+                padding: 0.15rem 0 0.85rem;
                 scroll-snap-type: x mandatory;
                 scrollbar-width: thin;
                 scrollbar-color: rgba(201,176,137,0.36) transparent;
@@ -772,11 +792,11 @@ def render_selected_work(content: dict[str, Any]) -> None:
 
             .slider-card {{
                 scroll-snap-align: start;
-                border-radius: 24px;
+                border-radius: 28px;
                 border: 1px solid rgba(201,176,137,0.12);
                 background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
                 overflow: hidden;
-                box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+                box-shadow: 0 18px 46px rgba(0,0,0,0.2);
             }}
 
             .slider-video-shell {{
@@ -792,29 +812,29 @@ def render_selected_work(content: dict[str, Any]) -> None:
             }}
 
             .slider-copy {{
-                padding: 1rem 1rem 1.05rem;
+                padding: 1.18rem 1.18rem 1.22rem;
             }}
 
             .slider-label {{
-                margin: 0 0 0.42rem 0;
-                font-size: 0.72rem;
-                letter-spacing: 0.22em;
+                margin: 0 0 0.52rem 0;
+                font-size: 0.74rem;
+                letter-spacing: 0.24em;
                 text-transform: uppercase;
                 color: #c9b089;
             }}
 
             .slider-copy h3 {{
                 margin: 0;
-                font-size: 1.16rem;
-                line-height: 1.1;
+                font-size: 1.24rem;
+                line-height: 1.16;
                 color: #faf5ed;
             }}
 
             .slider-role {{
-                margin: 0.42rem 0 0 0;
+                margin: 0.52rem 0 0 0;
                 color: rgba(243,237,228,0.66);
-                font-size: 0.82rem;
-                line-height: 1.5;
+                font-size: 0.85rem;
+                line-height: 1.58;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
@@ -822,10 +842,10 @@ def render_selected_work(content: dict[str, Any]) -> None:
             }}
 
             .slider-summary {{
-                margin: 0.58rem 0 0 0;
+                margin: 0.75rem 0 0 0;
                 color: rgba(243,237,228,0.84);
-                font-size: 0.88rem;
-                line-height: 1.55;
+                font-size: 0.92rem;
+                line-height: 1.65;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
@@ -833,19 +853,19 @@ def render_selected_work(content: dict[str, Any]) -> None:
             }}
 
             .slider-link {{
-                margin-top: 0.78rem;
+                margin-top: 0.95rem;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                min-height: 2.15rem;
-                border-radius: 14px;
+                min-height: 2.35rem;
+                border-radius: 15px;
                 border: 1px solid rgba(201,176,137,0.18);
                 background: rgba(255,255,255,0.018);
                 color: #f3ede4;
                 text-decoration: none;
-                font-size: 0.78rem;
-                letter-spacing: 0.08em;
+                font-size: 0.79rem;
+                letter-spacing: 0.1em;
                 text-transform: uppercase;
                 transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
             }}
@@ -858,13 +878,13 @@ def render_selected_work(content: dict[str, Any]) -> None:
 
             @media (max-width: 980px) {{
                 .slider-track {{
-                    grid-auto-columns: calc((100% - 1rem) / 2);
+                    grid-auto-columns: calc((100% - 1.25rem) / 2);
                 }}
             }}
 
             @media (max-width: 720px) {{
                 .slider-track {{
-                    grid-auto-columns: 88%;
+                    grid-auto-columns: 92%;
                 }}
             }}
         </style>
@@ -875,7 +895,7 @@ def render_selected_work(content: dict[str, Any]) -> None:
             </div>
         </div>
         """,
-        height=520,
+        height=590,
     )
 
 
