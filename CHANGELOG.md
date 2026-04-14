@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.7] - 2026-04-14
+
+- Replaced the earlier static hero treatment with real scroll-based parallax motion across the hero media, glow layer, and headline block.
+- Added gentle drifting parallax to selected supporting sections so the page feels more cinematic while scrolling.
+- Kept the effect desktop-focused and disabled it automatically on smaller screens and reduced-motion environments.
+- Snapshot: `docs/versions/assets/v0.7.7-home.png`
+- Rollback target: `v0.7.7`
+
 ## [v0.7.6] - 2026-04-03
 
 - Added subtle premium motion cues with a desktop hero parallax feel and a more atmospheric highlight treatment.
