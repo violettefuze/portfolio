@@ -127,6 +127,7 @@ def inject_css() -> None:
             --muted: rgba(243,237,228,0.72);
             --gold: #c9b089;
             --shadow: 0 30px 72px rgba(0,0,0,0.34);
+            --parallax-offset: 0px;
         }
 
         html {
@@ -293,6 +294,10 @@ def inject_css() -> None:
 
         .hero {
             position: relative;
+            --hero-media-offset: 0px;
+            --hero-content-offset: 0px;
+            --hero-glow-offset: 0px;
+            --hero-media-scale: 1.04;
             min-height: 43rem;
             border-radius: 42px;
             overflow: hidden;
@@ -311,6 +316,9 @@ def inject_css() -> None:
             opacity: 0.45;
             pointer-events: none;
             mix-blend-mode: screen;
+            transform: translate3d(0, var(--hero-glow-offset), 0) scale(1.02);
+            transition: transform 0.18s linear;
+            will-change: transform;
         }
 
         .hero-media {
@@ -318,13 +326,9 @@ def inject_css() -> None:
             inset: 0;
             background-size: cover;
             background-position: center top;
-            background-attachment: fixed;
-            transform: scale(1.01);
-            transition: transform 8s ease;
-        }
-
-        .hero:hover .hero-media {
-            transform: scale(1.05);
+            transform: translate3d(0, var(--hero-media-offset), 0) scale(var(--hero-media-scale));
+            transition: transform 0.18s linear;
+            will-change: transform;
         }
 
         .hero-scrim {
@@ -344,6 +348,15 @@ def inject_css() -> None:
             min-height: 43rem;
             padding: 3.65rem;
             max-width: 47rem;
+            transform: translate3d(0, var(--hero-content-offset), 0);
+            transition: transform 0.18s linear;
+            will-change: transform;
+        }
+
+        [data-parallax-speed] {
+            transform: translate3d(0, var(--parallax-offset), 0);
+            transition: transform 0.18s linear;
+            will-change: transform;
         }
 
         .eyebrow {
@@ -694,8 +707,13 @@ def inject_css() -> None:
                 padding: 2.35rem;
             }
 
-            .hero-media {
-                background-attachment: scroll;
+            .hero::after,
+            .hero-media,
+            .hero-content,
+            [data-parallax-speed] {
+                transform: none !important;
+                transition: none !important;
+                will-change: auto;
             }
 
             .hero h1 {
@@ -784,7 +802,7 @@ def render_partner_logos(content: dict[str, Any]) -> None:
     repeated = "".join(logos_markup + logos_markup)
     render_html(
         f"""
-        <section class="logo-band fade-up">
+        <section class="logo-band fade-up" data-parallax-speed="0.06">
             <p class="logo-label">Kunden aus dem FrameArt-Umfeld</p>
             <div class="logo-track">{repeated}</div>
         </section>
@@ -1074,11 +1092,103 @@ def render_skills(content: dict[str, Any]) -> None:
 def render_quote() -> None:
     render_html(
         """
-        <div class="quote-panel fade-up">
+        <div class="quote-panel fade-up" data-parallax-speed="0.1">
             <p class="quote-text">Ich kenne Produktion nicht nur aus einer Rolle.</p>
             <p class="quote-text">Ich kenne sie von der Lehre bis zur Geschäftsführung.</p>
         </div>
         """
+    )
+
+
+def render_parallax_effects() -> None:
+    components.html(
+        """
+        <script>
+            const parentWindow = window.parent;
+            const parentDocument = parentWindow.document;
+            const cleanupKey = "__timPortfolioParallaxCleanup";
+            const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+            if (parentWindow[cleanupKey]) {
+                parentWindow[cleanupKey]();
+            }
+
+            const clearParallax = () => {
+                const hero = parentDocument.querySelector(".hero");
+                if (hero) {
+                    hero.style.removeProperty("--hero-media-offset");
+                    hero.style.removeProperty("--hero-content-offset");
+                    hero.style.removeProperty("--hero-glow-offset");
+                    hero.style.removeProperty("--hero-media-scale");
+                }
+
+                parentDocument.querySelectorAll("[data-parallax-speed]").forEach((element) => {
+                    element.style.removeProperty("--parallax-offset");
+                });
+            };
+
+            let frame = null;
+
+            const updateParallax = () => {
+                frame = null;
+                const prefersReducedMotion = parentWindow.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                const enableParallax = parentWindow.innerWidth > 960 && !prefersReducedMotion;
+
+                if (!enableParallax) {
+                    clearParallax();
+                    return;
+                }
+
+                const viewportHeight = parentWindow.innerHeight;
+                const hero = parentDocument.querySelector(".hero");
+
+                if (hero) {
+                    const rect = hero.getBoundingClientRect();
+                    const centerOffset = rect.top + rect.height / 2 - viewportHeight / 2;
+                    const normalized = clamp(centerOffset / viewportHeight, -1.2, 1.2);
+
+                    hero.style.setProperty("--hero-media-offset", `${normalized * -48}px`);
+                    hero.style.setProperty("--hero-content-offset", `${normalized * 18}px`);
+                    hero.style.setProperty("--hero-glow-offset", `${normalized * -30}px`);
+                    hero.style.setProperty("--hero-media-scale", `${1.05 + Math.abs(normalized) * 0.035}`);
+                }
+
+                parentDocument.querySelectorAll("[data-parallax-speed]").forEach((element) => {
+                    const rect = element.getBoundingClientRect();
+                    const centerOffset = rect.top + rect.height / 2 - viewportHeight / 2;
+                    const speed = Number(element.dataset.parallaxSpeed || "0.08");
+                    const offset = clamp(centerOffset * speed * -1, -42, 42);
+                    element.style.setProperty("--parallax-offset", `${offset}px`);
+                });
+            };
+
+            const requestUpdate = () => {
+                if (frame !== null) {
+                    return;
+                }
+                frame = parentWindow.requestAnimationFrame(updateParallax);
+            };
+
+            const observer = new parentWindow.MutationObserver(requestUpdate);
+            observer.observe(parentDocument.body, { childList: true, subtree: true });
+
+            parentWindow.addEventListener("scroll", requestUpdate, { passive: true });
+            parentWindow.addEventListener("resize", requestUpdate);
+
+            parentWindow[cleanupKey] = () => {
+                if (frame !== null) {
+                    parentWindow.cancelAnimationFrame(frame);
+                    frame = null;
+                }
+                observer.disconnect();
+                parentWindow.removeEventListener("scroll", requestUpdate);
+                parentWindow.removeEventListener("resize", requestUpdate);
+            };
+
+            requestUpdate();
+        </script>
+        """,
+        height=0,
     )
 
 
@@ -1131,6 +1241,7 @@ def main() -> None:
     render_quote()
     render_contact(content)
     render_html('</div>')
+    render_parallax_effects()
 
 
 if __name__ == "__main__":
