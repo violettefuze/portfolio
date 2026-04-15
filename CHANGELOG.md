@@ -10,6 +10,13 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.10] - 2026-04-16
+
+- Added the LinkedIn profile to the contact section as a compact icon-style link.
+- Kept the contact area minimal and visually aligned with the existing glass-like panel treatment.
+- Snapshot: `docs/versions/assets/v0.7.10-home.png`
+- Rollback target: `v0.7.10`
+
 ## [v0.7.9] - 2026-04-16
 
 - Added a dedicated spacing transition between the Background cards and the Tools & Craft section.
