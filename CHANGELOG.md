@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.12] - 2026-04-16
+
+- Removed the stray raw-code artifact from the `Direkt` contact card by simplifying how the closing contact HTML is assembled.
+- Centered and tightened the two right-hand contact cards so the closing section reads more symmetrical against the rest of the three-column layout.
+- Kept the LinkedIn icon in the left identity card while preserving the darker glass-panel visual language.
+- Snapshot: `docs/versions/assets/v0.7.12-home.png`
+- Rollback target: `v0.7.12`
+
 ## [v0.7.11] - 2026-04-16
 
 - Rebuilt the closing contact area into the same three-column card rhythm used across the rest of the site.
