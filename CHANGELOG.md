@@ -10,6 +10,14 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.11] - 2026-04-16
+
+- Rebuilt the closing contact area into the same three-column card rhythm used across the rest of the site.
+- Moved the LinkedIn link into the left identity card so the closing section reads more consistently and feels better integrated.
+- Added a dedicated background panel treatment behind the left contact intro block to match the established visual language.
+- Snapshot: `docs/versions/assets/v0.7.11-home.png`
+- Rollback target: `v0.7.11`
+
 ## [v0.7.10] - 2026-04-16
 
 - Added the LinkedIn profile to the contact section as a compact icon-style link.
