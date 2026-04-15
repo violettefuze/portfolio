@@ -676,7 +676,8 @@ def inject_css() -> None:
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1.18rem;
-            margin-top: 0.4rem;
+            max-width: 1180px;
+            margin: 0.4rem auto 0;
         }
 
         .contact-panel {
@@ -684,6 +685,13 @@ def inject_css() -> None:
             padding: 2.4rem 2.3rem;
             display: flex;
             flex-direction: column;
+        }
+
+        .contact-panel-direct,
+        .contact-panel-note {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .contact-panel > * {
@@ -724,6 +732,16 @@ def inject_css() -> None:
 
         .contact-detail-block + .contact-detail-block {
             margin-top: 0.55rem;
+        }
+
+        .contact-panel-direct .contact-detail-block {
+            width: 100%;
+            max-width: 19rem;
+        }
+
+        .contact-panel-direct > .contact-label,
+        .contact-panel-note > .contact-label {
+            width: 100%;
         }
 
         .contact-value {
@@ -1299,6 +1317,7 @@ def render_contact(content: dict[str, Any]) -> None:
     site = content["site"]
     contact = content["contact"]
     render_html('<div class="contact-gap" aria-hidden="true"></div>')
+
     linkedin_markup = ""
     if contact.get("linkedin"):
         linkedin_markup = (
@@ -1312,45 +1331,34 @@ def render_contact(content: dict[str, Any]) -> None:
             '</div>'
         )
 
-    website_markup = ""
-    if contact.get("website"):
-        website_markup = (
-            '<div class="contact-detail-block">'
-            '<div class="contact-label">Website</div>'
-            f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
-            '</div>'
-        )
-
-    render_html(
-        f"""
-        <div class="contact-grid">
-            <div class="contact-panel fade-up">
-                <div class="section-label">Kontakt</div>
-                <h2 class="contact-intro-heading">{html.escape(site["title"])}</h2>
-                <p class="contact-intro-subtitle">{html.escape(site["subtitle"])}</p>
-                <p class="contact-intro-location">{html.escape(site["location"])}</p>
-                <div class="contact-intro-spacer" aria-hidden="true"></div>
-                {linkedin_markup}
-            </div>
-            <div class="contact-panel fade-up">
-                <div class="contact-label">Direkt</div>
-                <div class="contact-detail-block">
-                    <div class="contact-label">Mail</div>
-                    <p class="contact-value">{html.escape(contact["email"])}</p>
-                </div>
-                <div class="contact-detail-block">
-                    <div class="contact-label">Telefon</div>
-                    <p class="contact-value">{html.escape(contact["phone"])}</p>
-                </div>
-                {website_markup}
-            </div>
-            <div class="contact-panel fade-up" data-parallax-speed="0.06">
-                <div class="contact-label">Verfügbar</div>
-                <p class="contact-note-text">{html.escape(contact["note"])}</p>
-            </div>
-        </div>
-        """
-    )
+    contact_markup = [
+        '<div class="contact-grid">',
+        '<div class="contact-panel fade-up">',
+        '<div class="section-label">Kontakt</div>',
+        f'<h2 class="contact-intro-heading">{html.escape(site["title"])}</h2>',
+        f'<p class="contact-intro-subtitle">{html.escape(site["subtitle"])}</p>',
+        f'<p class="contact-intro-location">{html.escape(site["location"])}</p>',
+        '<div class="contact-intro-spacer" aria-hidden="true"></div>',
+        linkedin_markup,
+        '</div>',
+        '<div class="contact-panel contact-panel-direct fade-up">',
+        '<div class="contact-label">Direkt</div>',
+        '<div class="contact-detail-block">',
+        '<div class="contact-label">Mail</div>',
+        f'<p class="contact-value">{html.escape(contact["email"])}</p>',
+        '</div>',
+        '<div class="contact-detail-block">',
+        '<div class="contact-label">Telefon</div>',
+        f'<p class="contact-value">{html.escape(contact["phone"])}</p>',
+        '</div>',
+        '</div>',
+        '<div class="contact-panel contact-panel-note fade-up" data-parallax-speed="0.06">',
+        '<div class="contact-label">Verfügbar</div>',
+        f'<p class="contact-note-text">{html.escape(contact["note"])}</p>',
+        '</div>',
+        '</div>',
+    ]
+    render_html("".join(contact_markup))
 
 
 def main() -> None:
