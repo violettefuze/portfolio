@@ -299,6 +299,7 @@ def inject_css() -> None:
             --hero-glow-offset: 0px;
             --hero-media-scale: 1.04;
             min-height: 43rem;
+            margin-bottom: 1.6rem;
             border-radius: 42px;
             overflow: hidden;
             border: 1px solid var(--line);
@@ -412,6 +413,10 @@ def inject_css() -> None:
             gap: 1.18rem;
         }
 
+        .statement-grid {
+            margin-top: 0.55rem;
+        }
+
         .statement-card,
         .skill-card,
         .work-card,
@@ -485,9 +490,10 @@ def inject_css() -> None:
         .logo-band {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.35rem;
             overflow: hidden;
-            padding-top: 0.2rem;
+            margin-top: 0.55rem;
+            padding-top: 0.95rem;
         }
 
         .logo-label {
@@ -553,6 +559,11 @@ def inject_css() -> None:
             color: var(--muted);
             line-height: 1.9;
             font-size: 1.04rem;
+        }
+
+        .section-copy + .slider-shell,
+        .section-copy + .skills-grid {
+            margin-top: 0.85rem;
         }
 
         .work-card {
@@ -700,6 +711,7 @@ def inject_css() -> None:
 
             .hero {
                 min-height: 35rem;
+                margin-bottom: 1.2rem;
             }
 
             .hero-content {
