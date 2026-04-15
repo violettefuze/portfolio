@@ -10,6 +10,13 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.8] - 2026-04-16
+
+- Opened up the transition below the landing image so the first blocks underneath no longer feel cramped.
+- Rebalanced the early-page vertical rhythm between the hero, statement cards, logo band, and the next section intro.
+- Snapshot: `docs/versions/assets/v0.7.8-home.png`
+- Rollback target: `v0.7.8`
+
 ## [v0.7.7] - 2026-04-14
 
 - Replaced the earlier static hero treatment with real scroll-based parallax motion across the hero media, glow layer, and headline block.
