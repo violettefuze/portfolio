@@ -10,6 +10,13 @@ This repo uses git tags as stable version names. Every tagged portfolio state sh
 
 - No unreleased changes.
 
+## [v0.7.9] - 2026-04-16
+
+- Added a dedicated spacing transition between the Background cards and the Tools & Craft section.
+- Relaxed the vertical rhythm in that lower mid-page handoff so the section break reads more intentionally.
+- Snapshot: `docs/versions/assets/v0.7.9-home.png`
+- Rollback target: `v0.7.9`
+
 ## [v0.7.8] - 2026-04-16
 
 - Opened up the transition below the landing image so the first blocks underneath no longer feel cramped.
