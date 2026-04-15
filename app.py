@@ -566,6 +566,10 @@ def inject_css() -> None:
             margin-top: 0.85rem;
         }
 
+        .section-gap-transition {
+            height: 2rem;
+        }
+
         .work-card {
             min-height: 0.38rem;
             margin-top: 0.45rem;
@@ -1081,6 +1085,7 @@ def render_experience(content: dict[str, Any]) -> None:
 
 def render_skills(content: dict[str, Any]) -> None:
     skills = content["skills"]
+    render_html('<div class="section-gap-transition" aria-hidden="true"></div>')
     render_html('<div class="section-label">Tools & Craft</div>')
     render_html('<h2 class="section-heading">Moderne Filmkameras, Ton, Licht und Post.</h2>')
     render_html(f'<p class="section-copy">{html.escape(skills["focus"])}</p>')
