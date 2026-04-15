@@ -687,6 +687,41 @@ def inject_css() -> None:
             margin-bottom: 0;
         }
 
+        .contact-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin: 0 0 1.2rem 0;
+        }
+
+        .contact-icon-link {
+            width: 2.85rem;
+            height: 2.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(201,176,137,0.2);
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.022));
+            color: #f3ede4;
+            text-decoration: none;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .contact-icon-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(201,176,137,0.34);
+            background: linear-gradient(180deg, rgba(201,176,137,0.14), rgba(255,255,255,0.032));
+            box-shadow: 0 18px 34px rgba(0,0,0,0.22);
+        }
+
+        .contact-icon-link svg {
+            width: 1rem;
+            height: 1rem;
+            display: block;
+        }
+
         .site-link {
             color: var(--gold) !important;
             text-decoration: none;
@@ -1226,6 +1261,17 @@ def render_contact(content: dict[str, Any]) -> None:
             '<div class="contact-label">Telefon</div>',
             f'<p class="contact-value">{html.escape(contact["phone"])}</p>',
         ]
+        if contact.get("linkedin"):
+            contact_markup.append('<div class="contact-label">LinkedIn</div>')
+            contact_markup.append(
+                '<div class="contact-actions">'
+                f'<a class="contact-icon-link" href="{html.escape(contact["linkedin"], quote=True)}" target="_blank" rel="noreferrer" aria-label="LinkedIn Profil">'
+                '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+                '<path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM8.5 18.6H5.38V9.62H8.5v8.98ZM18.62 18.6H15.5v-4.37c0-1.04-.02-2.39-1.45-2.39-1.45 0-1.68 1.13-1.68 2.31v4.45H9.25V9.62h2.99v1.23h.04c.42-.79 1.44-1.62 2.96-1.62 3.17 0 3.75 2.08 3.75 4.79v4.58Z"/>'
+                '</svg>'
+                '</a>'
+                '</div>'
+            )
         if contact.get("website"):
             contact_markup.append('<div class="contact-label">Website</div>')
             contact_markup.append(
