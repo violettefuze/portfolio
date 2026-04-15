@@ -672,8 +672,58 @@ def inject_css() -> None:
             height: 1.65rem;
         }
 
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.18rem;
+            margin-top: 0.4rem;
+        }
+
         .contact-panel {
-            padding: 2.45rem;
+            min-height: 100%;
+            padding: 2.4rem 2.3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-intro-heading {
+            margin: 0;
+            font-size: clamp(2.05rem, 3.1vw, 2.9rem);
+            line-height: 1.04;
+            letter-spacing: -0.03em;
+            color: #faf5ed;
+        }
+
+        .contact-intro-subtitle,
+        .contact-intro-location,
+        .contact-note-text {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.01rem;
+            line-height: 1.78;
+        }
+
+        .contact-intro-subtitle {
+            margin-top: 0.45rem;
+        }
+
+        .contact-intro-location {
+            margin-top: 1.05rem;
+            color: var(--muted);
+        }
+
+        .contact-intro-spacer {
+            flex: 1;
+            min-height: 1.3rem;
+        }
+
+        .contact-detail-block + .contact-detail-block {
+            margin-top: 0.55rem;
         }
 
         .contact-value {
@@ -691,7 +741,7 @@ def inject_css() -> None:
             display: flex;
             align-items: center;
             gap: 0.7rem;
-            margin: 0 0 1.2rem 0;
+            margin: 0;
         }
 
         .contact-icon-link {
@@ -733,7 +783,8 @@ def inject_css() -> None:
 
         @media (max-width: 960px) {
             .statement-grid,
-            .skills-grid {
+            .skills-grid,
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1248,38 +1299,58 @@ def render_contact(content: dict[str, Any]) -> None:
     site = content["site"]
     contact = content["contact"]
     render_html('<div class="contact-gap" aria-hidden="true"></div>')
-    left, right = st.columns([0.95, 1.05], gap="large")
-    with left:
-        render_html('<div class="section-label">Kontakt</div>')
-        render_html(f'<h2 class="section-heading">{html.escape(site["title"])}</h2>')
-        render_html(f'<p class="section-copy">{html.escape(site["subtitle"])}<br>{html.escape(site["location"])}</p>')
-    with right:
-        contact_markup = [
-            '<div class="contact-panel fade-up">',
-            '<div class="contact-label">Mail</div>',
-            f'<p class="contact-value">{html.escape(contact["email"])}</p>',
-            '<div class="contact-label">Telefon</div>',
-            f'<p class="contact-value">{html.escape(contact["phone"])}</p>',
-        ]
-        if contact.get("linkedin"):
-            contact_markup.append('<div class="contact-label">LinkedIn</div>')
-            contact_markup.append(
-                '<div class="contact-actions">'
-                f'<a class="contact-icon-link" href="{html.escape(contact["linkedin"], quote=True)}" target="_blank" rel="noreferrer" aria-label="LinkedIn Profil">'
-                '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
-                '<path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM8.5 18.6H5.38V9.62H8.5v8.98ZM18.62 18.6H15.5v-4.37c0-1.04-.02-2.39-1.45-2.39-1.45 0-1.68 1.13-1.68 2.31v4.45H9.25V9.62h2.99v1.23h.04c.42-.79 1.44-1.62 2.96-1.62 3.17 0 3.75 2.08 3.75 4.79v4.58Z"/>'
-                '</svg>'
-                '</a>'
-                '</div>'
-            )
-        if contact.get("website"):
-            contact_markup.append('<div class="contact-label">Website</div>')
-            contact_markup.append(
-                f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
-            )
-        contact_markup.append(f'<p class="contact-value">{html.escape(contact["note"])}</p>')
-        contact_markup.append('</div>')
-        render_html("".join(contact_markup))
+    linkedin_markup = ""
+    if contact.get("linkedin"):
+        linkedin_markup = (
+            '<div class="contact-label">LinkedIn</div>'
+            '<div class="contact-actions">'
+            f'<a class="contact-icon-link" href="{html.escape(contact["linkedin"], quote=True)}" target="_blank" rel="noreferrer" aria-label="LinkedIn Profil">'
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+            '<path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM8.5 18.6H5.38V9.62H8.5v8.98ZM18.62 18.6H15.5v-4.37c0-1.04-.02-2.39-1.45-2.39-1.45 0-1.68 1.13-1.68 2.31v4.45H9.25V9.62h2.99v1.23h.04c.42-.79 1.44-1.62 2.96-1.62 3.17 0 3.75 2.08 3.75 4.79v4.58Z"/>'
+            '</svg>'
+            '</a>'
+            '</div>'
+        )
+
+    website_markup = ""
+    if contact.get("website"):
+        website_markup = (
+            '<div class="contact-detail-block">'
+            '<div class="contact-label">Website</div>'
+            f'<p class="contact-value"><a class="site-link" href="{html.escape(contact["website"], quote=True)}" target="_blank">{html.escape(contact["website"])}</a></p>'
+            '</div>'
+        )
+
+    render_html(
+        f"""
+        <div class="contact-grid">
+            <div class="contact-panel fade-up">
+                <div class="section-label">Kontakt</div>
+                <h2 class="contact-intro-heading">{html.escape(site["title"])}</h2>
+                <p class="contact-intro-subtitle">{html.escape(site["subtitle"])}</p>
+                <p class="contact-intro-location">{html.escape(site["location"])}</p>
+                <div class="contact-intro-spacer" aria-hidden="true"></div>
+                {linkedin_markup}
+            </div>
+            <div class="contact-panel fade-up">
+                <div class="contact-label">Direkt</div>
+                <div class="contact-detail-block">
+                    <div class="contact-label">Mail</div>
+                    <p class="contact-value">{html.escape(contact["email"])}</p>
+                </div>
+                <div class="contact-detail-block">
+                    <div class="contact-label">Telefon</div>
+                    <p class="contact-value">{html.escape(contact["phone"])}</p>
+                </div>
+                {website_markup}
+            </div>
+            <div class="contact-panel fade-up" data-parallax-speed="0.06">
+                <div class="contact-label">Verfügbar</div>
+                <p class="contact-note-text">{html.escape(contact["note"])}</p>
+            </div>
+        </div>
+        """
+    )
 
 
 def main() -> None:
