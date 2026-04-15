@@ -1043,9 +1043,9 @@ def render_selected_work(content: dict[str, Any]) -> None:
 
 def render_experience(content: dict[str, Any]) -> None:
     render_html('<div class="section-label">Background</div>')
-    render_html('<h2 class="section-heading">Lehre, Set-Erfahrung, eigene GmbH.</h2>')
+    render_html('<h2 class="section-heading">Ausbildung, Set-Erfahrung, eigene GmbH.</h2>')
     render_html(
-        '<p class="section-copy">Die Kombination aus Lehre bei FrameArt Media, europaweiter Produktionspraxis und späterer Verantwortung als Gesellschafter und Geschäftsführer sorgt dafür, dass Kamera, Licht, Ton, Postproduktion und Kundenlogik zusammen gedacht werden.</p>'
+        '<p class="section-copy">Die Kombination aus Ausbildung bei FrameArt Media, europaweiter Produktionspraxis und späterer Verantwortung als Gesellschafter und Geschäftsführer sorgt dafür, dass Kamera, Licht, Ton, Postproduktion und Kundenlogik zusammen gedacht werden.</p>'
     )
 
     cols = st.columns(3, gap="large")
@@ -1094,7 +1094,7 @@ def render_quote() -> None:
         """
         <div class="quote-panel fade-up" data-parallax-speed="0.1">
             <p class="quote-text">Ich kenne Produktion nicht nur aus einer Rolle.</p>
-            <p class="quote-text">Ich kenne sie von der Lehre bis zur Geschäftsführung.</p>
+            <p class="quote-text">Ich kenne sie von der Ausbildung bis zur Geschäftsführung.</p>
         </div>
         """
     )
