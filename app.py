@@ -284,12 +284,31 @@ def inject_css() -> None:
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
-            color: var(--muted);
             font-size: 0.8rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             position: relative;
             z-index: 1;
+        }
+
+        .nav-copy a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-copy a:hover,
+        .nav-copy a:focus-visible {
+            color: var(--text);
+        }
+
+        .section-anchor-target {
+            scroll-margin-top: 7.5rem;
+        }
+
+        .section-anchor {
+            display: block;
+            height: 0;
         }
 
         .hero {
@@ -817,6 +836,10 @@ def inject_css() -> None:
                 border-radius: 30px;
             }
 
+            .section-anchor-target {
+                scroll-margin-top: 1.5rem;
+            }
+
             .hero {
                 min-height: 35rem;
                 margin-bottom: 1.2rem;
@@ -867,9 +890,9 @@ def render_topbar(content: dict[str, Any]) -> None:
                 </div>
             </div>
             <div class="nav-copy">
-                <span>Selected Work</span>
-                <span>Experience</span>
-                <span>Contact</span>
+                <a href="#selected-work">Selected Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
         """
@@ -931,7 +954,7 @@ def render_partner_logos(content: dict[str, Any]) -> None:
 
 
 def render_selected_work_intro() -> None:
-    render_html('<div class="section-label">Selected Work</div>')
+    render_html('<div id="selected-work" class="section-label section-anchor-target">Selected Work</div>')
     render_html('<h2 class="section-heading">Drei Projekte im Blick. Der Rest im horizontalen Film-Strip.</h2>')
     render_html(
         '<p class="section-copy">Die ersten Arbeiten sind sofort sichtbar. Weitere Projekte lassen sich seitlich durchscrollen, damit die Seite kompakter bleibt und trotzdem alles zeigen kann.</p>'
@@ -1163,6 +1186,7 @@ def render_selected_work(content: dict[str, Any]) -> None:
 
 def render_experience(content: dict[str, Any]) -> None:
     render_html('<div class="section-label">Background</div>')
+    render_html('<span id="experience" class="section-anchor section-anchor-target"></span>')
     render_html('<h2 class="section-heading">Ausbildung, Set-Erfahrung, eigene GmbH.</h2>')
     render_html(
         '<p class="section-copy">Die Kombination aus Ausbildung bei FrameArt Media, europaweiter Produktionspraxis und späterer Verantwortung als Gesellschafter und Geschäftsführer sorgt dafür, dass Kamera, Licht, Ton, Postproduktion und Kundenlogik zusammen gedacht werden.</p>'
@@ -1334,7 +1358,7 @@ def render_contact(content: dict[str, Any]) -> None:
     contact_markup = [
         '<div class="contact-grid">',
         '<div class="contact-panel fade-up">',
-        '<div class="section-label">Kontakt</div>',
+        '<div id="contact" class="section-label section-anchor-target">Kontakt</div>',
         f'<h2 class="contact-intro-heading">{html.escape(site["title"])}</h2>',
         f'<p class="contact-intro-subtitle">{html.escape(site["subtitle"])}</p>',
         f'<p class="contact-intro-location">{html.escape(site["location"])}</p>',
