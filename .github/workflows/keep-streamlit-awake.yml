@@ -1,0 +1,109 @@
+name: Keep Streamlit Awake
+
+on:
+  schedule:
+    # Streamlit Community Cloud sleeps after 12 hours without traffic.
+    # Running every 4 hours leaves room for occasional scheduler delay.
+    - cron: "17 */4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: keep-streamlit-awake
+  cancel-in-progress: false
+
+jobs:
+  visit-app:
+    name: Visit Streamlit app
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Install Playwright
+        run: |
+          mkdir -p "$RUNNER_TEMP/keep-streamlit-awake"
+          cd "$RUNNER_TEMP/keep-streamlit-awake"
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Load public app in a browser
+        env:
+          STREAMLIT_APP_URL: https://tim-heid.streamlit.app
+        run: |
+          cd "$RUNNER_TEMP/keep-streamlit-awake"
+          node <<'EOF'
+          const { chromium } = require("playwright");
+
+          async function main() {
+            const appUrl = process.env.STREAMLIT_APP_URL;
+            const wakeButton = /get this app back up|wake.*app|yes/i;
+            const startedAt = Date.now();
+            const timeoutMs = 180_000;
+
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({
+              viewport: { width: 1280, height: 900 },
+              userAgent:
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 " +
+                "(KHTML, like Gecko) Chrome/120 Safari/537.36",
+            });
+
+            page.setDefaultTimeout(30_000);
+            await page.goto(appUrl, { waitUntil: "domcontentloaded", timeout: 120_000 });
+
+            async function clickWakeButtonIfPresent() {
+              for (const frame of page.frames()) {
+                const button = frame.getByRole("button", { name: wakeButton });
+                const count = await button.count().catch(() => 0);
+                if (count === 0) {
+                  continue;
+                }
+
+                await button.first().click({ timeout: 10_000 }).catch(() => {});
+                return true;
+              }
+              return false;
+            }
+
+            async function appLoaded() {
+              for (const frame of page.frames()) {
+                const navLink = frame.getByRole("link", { name: "Selected Work" });
+                if ((await navLink.count().catch(() => 0)) > 0) {
+                  return true;
+                }
+
+                const selectedWork = frame.locator("text=Drei Projekte im Blick");
+                if ((await selectedWork.count().catch(() => 0)) > 0) {
+                  return true;
+                }
+              }
+              return false;
+            }
+
+            try {
+              while (Date.now() - startedAt < timeoutMs) {
+                await clickWakeButtonIfPresent();
+
+                if (await appLoaded()) {
+                  console.log(`Streamlit app loaded: ${page.url()}`);
+                  await browser.close();
+                  return;
+                }
+
+                await page.waitForTimeout(5_000);
+              }
+
+              throw new Error(`App did not render expected content within ${timeoutMs / 1000}s.`);
+            } catch (error) {
+              console.error(error);
+              await page.screenshot({ path: "streamlit-awake-failure.png", fullPage: true }).catch(() => {});
+              await browser.close();
+              process.exit(1);
+            }
+          }
+
+          main();
+          EOF
